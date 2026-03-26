@@ -795,6 +795,50 @@ footer a {
     margin-top: 16px
 }
 
+.filter-bar {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.filter-btn {
+    background: none;
+    border: none;
+    color: var(--champagne-soft);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    padding: 12px 24px;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.filter-btn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.filter-btn.active {
+    background: #1a2a44; /* Dark navy as seen in example image */
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .filter-bar {
+        gap: 8px;
+    }
+    .filter-btn {
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+}
+
 .detail-section {
     display: none;
     padding-top: 28px

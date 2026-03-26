@@ -276,15 +276,36 @@ function renderFleetCards(list, targetId, isApiData = false) {
   }).join('');
 }
 
+let allCars = [];
+
 async function fetchApiCars() {
   try {
     const response = await fetch('./cars.json');
-    const cars = await response.json();
-    renderFleetCards(cars, 'sgTransferGrid', true);
+    allCars = await response.json();
+    renderFleetCards(allCars, 'sgTransferGrid', true);
+    setupFleetFilter();
   } catch (error) {
     console.error('Error fetching cars:', error);
-    // Fallback or error message could be added here
   }
+}
+
+function setupFleetFilter() {
+  const filterButtons = document.querySelectorAll('#fleetFilterBar .filter-btn');
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Toggle active class
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const category = btn.dataset.category;
+      if (category === 'all') {
+        renderFleetCards(allCars, 'sgTransferGrid', true);
+      } else {
+        const filtered = allCars.filter(car => car.category.toLowerCase() === category.toLowerCase());
+        renderFleetCards(filtered, 'sgTransferGrid', true);
+      }
+    });
+  });
 }
 
 function setupFilter(data, searchId, categoryId, targetId, countId, buttonText, region) {

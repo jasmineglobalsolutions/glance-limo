@@ -45,36 +45,6 @@
         "createdAt": "2025-06-23T12:02:12.810Z"
     },
     {
-        "id": "cmc91tu220004kgd0mexnl7iw",
-        "name": "BMW 5 Series",
-        "description": "BMW 5 Series",
-        "category": "business",
-        "imageUrl": "https://glance-limousine.s3.ap-south-1.amazonaws.com/cars/c3ee26e5-e0ad-40f3-9ffd-89e119c43d82.png",
-        "personCapacity": 2,
-        "smallLuggage": 2,
-        "bigLuggage": 2,
-        "hasChildSeat": false,
-        "pricePerHour": 90,
-        "ratePerTransfer": 95,
-        "tenantId": "05a02a06-5361-4a47-aaae-f9b8bf49c380",
-        "createdAt": "2025-06-23T12:04:25.244Z"
-    },
-    {
-        "id": "cmc91w8y70005kgd0hmv6wcbp",
-        "name": "Audi A6",
-        "description": "Audi A6",
-        "category": "business",
-        "imageUrl": "https://glance-limousine.s3.ap-south-1.amazonaws.com/cars/c00bc8b7-e5e8-496f-b47d-baa7518c2347.png",
-        "personCapacity": 2,
-        "smallLuggage": 2,
-        "bigLuggage": 2,
-        "hasChildSeat": false,
-        "pricePerHour": 90,
-        "ratePerTransfer": 95,
-        "tenantId": "05a02a06-5361-4a47-aaae-f9b8bf49c380",
-        "createdAt": "2025-06-23T12:06:16.066Z"
-    },
-    {
         "id": "cmc93juei0006kgd08hkhmie4",
         "name": "Mercedes V-Class",
         "description": "Mercedes V-Class",
@@ -253,20 +223,5 @@
         "ratePerTransfer": 160,
         "tenantId": "05a02a06-5361-4a47-aaae-f9b8bf49c380",
         "createdAt": "2025-06-24T00:41:51.121Z"
-    },
-    {
-        "id": "cmc9016d70000kgd0jpgxuuik",
-        "name": "BMW 7 Series",
-        "description": "BMW 7 Series",
-        "category": "luxury",
-        "imageUrl": "https://glance-limousine.s3.ap-south-1.amazonaws.com/cars/b1c6ebd5-b2a4-44f7-a435-47ec7e27ee43.png",
-        "personCapacity": 2,
-        "smallLuggage": 2,
-        "bigLuggage": 2,
-        "hasChildSeat": false,
-        "pricePerHour": 155,
-        "ratePerTransfer": 160,
-        "tenantId": "05a02a06-5361-4a47-aaae-f9b8bf49c380",
-        "createdAt": "2025-06-23T11:14:07.974Z"
     }
 ]
