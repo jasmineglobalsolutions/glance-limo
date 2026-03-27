@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Corporate Events Transport | Glance Limousine</title>
+    <meta name="description" content="Professional corporate events transport in Singapore for conferences, executive meetings, VIP guest arrivals, roadshows, staff movement, and event logistics." />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&amp;family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
+    <link href="styles.css" rel="stylesheet" />
+    <style>
+        .corp-hero {
+            padding: 86px 0 54px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, rgba(22, 22, 24, 0.9), rgba(28, 27, 31, 0.95)), url('https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            border-bottom: 1px solid var(--line);
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 28px;
+            align-items: stretch;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-copy {
+            background: rgba(44, 34, 29, 0.85);
+            padding: 38px;
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            backdrop-filter: blur(10px);
+        }
+        .hero-copy h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(44px, 6vw, 72px);
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            margin-bottom: 18px;
+            color: var(--white);
+        }
+        .hero-copy p {
+            color: var(--muted);
+            font-size: 18px;
+            max-width: 680px;
+            margin-bottom: 26px;
+        }
+        .hero-card {
+            background: rgba(44, 34, 29, 0.85);
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 18px;
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            backdrop-filter: blur(10px);
+        }
+        .hero-card h3 {
+            font-size: 22px; margin-bottom: 8px; font-family: 'Playfair Display', serif; color: var(--champagne-soft);
+        }
+        .hero-card ul {
+            list-style: none; display: grid; gap: 12px; color: var(--muted); padding: 0;
+        }
+        .hero-card li {
+            padding: 14px 16px; border-radius: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            position: relative;
+            padding-left: 40px;
+        }
+        .hero-card li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 15px;
+            color: var(--champagne-soft);
+        }
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .service-card {
+            background: var(--panel);
+            padding: 30px;
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            transition: 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--line-strong);
+        }
+        .service-card .tag {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(168, 144, 128, 0.1);
+            color: var(--champagne-soft);
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 15px;
+            border: 1px solid var(--line);
+        }
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+        .service-card ul {
+            list-style: none; padding: 0; margin-top: 15px;
+        }
+        .service-card li {
+            position: relative; padding-left: 25px; margin-bottom: 8px; color: var(--muted);
+        }
+        .service-card li::before {
+            content: "\f0da";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--champagne-soft);
+        }
+        .fleet-card {
+            background: var(--panel2);
+            padding: 24px;
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            text-align: center;
+        }
+        .fleet-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+        .fleet-card p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+        .cta-box {
+            background: linear-gradient(135deg, #3c2e26 0%, #6f5647 100%);
+            padding: 40px;
+            border-radius: var(--radius);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+        .cta-box h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            color: var(--white);
+            line-height: 1.1;
+        }
+        @media (max-width: 992px) {
+            .hero-grid, .service-grid, .cta-box {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">Premium chauffeur service · airport transfers · private tours · cross-border Singapore–Malaysia</div>
+    <header class="navbar">
+        <div class="container nav-inner">
+            <div class="brand">
+                <img alt="Glance Limousine logo" class="brand-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAYAAADL1t+KAAEAAElEQVR4XuydBYAsxbX+p7tnZuU67lwkCSQQJEoUEognQIgbRF5eXlz+cSH24q4v9qIvLoSQkBA0aEhwh8sV4Lqtjbb9f19v99A7O7o7u3f3UgV1e7a79Cs5VafOOZXJGGcQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDwM6Pv7Vz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" />
+                <div class="brand-copy">
+                    <div class="brand-title">Glance Limousine</div>
+                    <div class="brand-sub">Luxury In Motion · Singapore</div>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html#home">Home</a><a href="index.html#sg-transfer">Singapore Transfer</a><a href="index.html#my-transfer">Cross Border
+                    Transfer</a><a href="index.html#sg-tours">Singapore Tours</a><a href="index.html#my-tours">Malaysia Tours</a><a
+                    href="singapore-attractions.html">Singapore Attractions</a><a
+                    href="wedding-chauffeur.html">Wedding Chauffeur</a><a
+                    href="corporate-events.html" class="active">Corporate Events</a><a
+                    href="index.html#shared">Seat In Coach</a><a href="index.html#fleet">Our Fleet</a><a href="index.html#faq">FAQ</a><a
+                    href="index.html#contact">Contact</a><a href="index.html#terms">Terms</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="corp-hero">
+        <div class="container hero-grid">
+            <div class="hero-copy">
+                <span class="eyebrow">Corporate Events Transport</span>
+                <h1>Professional Executive Transport For Business Events And VIP Movements</h1>
+                <p>
+                    Structured chauffeur-driven transport for conferences, executive meetings, corporate roadshows,
+                    VIP arrivals, delegate movement, and event logistics across Singapore and cross-border routes.
+                </p>
+                <div class="hero-actions">
+                    <a class="btn" href="https://wa.me/6584444744" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Request Corporate Quote</a>
+                    <a class="btn ghost" href="#corporate-services">Explore Service Details</a>
+                </div>
+            </div>
+
+            <div class="hero-card">
+                <div>
+                    <h3>Built for business-ready movement and coordinated event execution</h3>
+                    <ul>
+                        <li>Executive point-to-point and hourly chauffeur support</li>
+                        <li>Conference, meeting, and delegate transfer planning</li>
+                        <li>VIP airport arrivals and guest routing</li>
+                        <li>Single vehicle or multi-vehicle event transport coordination</li>
+                    </ul>
+                </div>
+                <a class="btn ghost" href="index.html#contact">Speak With Our Team</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="corporate-services">
+        <div class="container">
+            <div class="section-head">
+                <p class="eyebrow">Corporate Event Services</p>
+                <h2>Business transport solutions tailored to your event schedule</h2>
+                <p>
+                    Glance Limousine supports professional event movement for executives, delegates, VIP guests, and teams
+                    with structured scheduling, premium vehicle comfort, and polished chauffeur presentation.
+                </p>
+            </div>
+
+            <div class="service-grid">
+                <article class="service-card">
+                    <span class="tag">Executive Support</span>
+                    <h3>Corporate Meeting Transfers</h3>
+                    <p>
+                        Reliable private chauffeur service for business appointments, executive itineraries, and premium city transfers throughout the workday.
+                    </p>
+                    <ul>
+                        <li>Executive point-to-point movement</li>
+                        <li>Hourly chauffeur disposal</li>
+                        <li>Professional punctual scheduling</li>
+                    </ul>
+                </article>
+
+                <article class="service-card">
+                    <span class="tag">Event Logistics</span>
+                    <h3>Conference & Delegate Movement</h3>
+                    <p>
+                        Structured transport planning for conferences, seminars, business forums, and corporate gatherings requiring coordinated guest movement.
+                    </p>
+                    <ul>
+                        <li>Delegate arrival planning</li>
+                        <li>Venue transfer coordination</li>
+                        <li>Multi-vehicle support available</li>
+                    </ul>
+                </article>
+
+                <article class="service-card">
+                    <span class="tag">VIP Movement</span>
+                    <h3>VIP Airport Meet & Transfer</h3>
+                    <p>
+                        Premium airport pickup arrangements for executives, speakers, investors, and invited guests requiring smooth arrival support.
+                    </p>
+                    <ul>
+                        <li>Airport to hotel transfers</li>
+                        <li>Airport to event venue routing</li>
+                        <li>Premium arrival experience</li>
+                    </ul>
+                </article>
+
+                <article class="service-card">
+                    <span class="tag">Cross-Border Business</span>
+                    <h3>Singapore & Malaysia Corporate Transfers</h3>
+                    <p>
+                        Professional cross-border movement for business meetings, regional events, and executive schedules extending beyond Singapore.
+                    </p>
+                    <ul>
+                        <li>Singapore to Johor transfers</li>
+                        <li>Corporate cross-border scheduling</li>
+                        <li>Private premium chauffeur coordination</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alt">
+        <div class="container">
+            <div class="section-head">
+                <p class="eyebrow">Recommended Fleet</p>
+                <h2>Corporate-ready premium vehicle options</h2>
+                <p>
+                    Vehicle selection can be matched to executive preference, group size, event profile, and routing complexity.
+                </p>
+            </div>
+
+            <div class="grid-4">
+                <article class="fleet-card card">
+                    <h4>Business Sedan</h4>
+                    <p>Suitable for executives requiring polished city transport with privacy and comfort.</p>
+                </article>
+                <article class="fleet-card card">
+                    <h4>Mercedes V-Class</h4>
+                    <p>Premium MPV option for VIP guests, executive teams, and coordinated event movement.</p>
+                </article>
+                <article class="fleet-card card">
+                    <h4>Toyota Alphard / Vellfire</h4>
+                    <p>Comfortable luxury option for executive transfers, airport routing, and premium client transport.</p>
+                </article>
+                <article class="fleet-card card">
+                    <h4>Multi-Vehicle Deployment</h4>
+                    <p>Ideal for delegate movement, guest arrival waves, and event transport coordination.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-head">
+                <p class="eyebrow">Why Glance</p>
+                <h2>Why businesses choose Glance Limousine</h2>
+            </div>
+
+            <div class="grid-4">
+                <article class="card p-20" style="padding: 24px;">
+                    <h3 style="font-family: 'Playfair Display', serif; color: var(--champagne-soft); margin-bottom: 15px;">Professional Presentation</h3>
+                    <p style="color: var(--muted);">Premium chauffeur standards aligned with executive and corporate event expectations.</p>
+                </article>
+                <article class="card p-20" style="padding: 24px;">
+                    <h3 style="font-family: 'Playfair Display', serif; color: var(--champagne-soft); margin-bottom: 15px;">Reliable Scheduling</h3>
+                    <p style="color: var(--muted);">Structured support for fixed meeting times, airport arrivals, venue changes, and live event timing.</p>
+                </article>
+                <article class="card p-20" style="padding: 24px;">
+                    <h3 style="font-family: 'Playfair Display', serif; color: var(--champagne-soft); margin-bottom: 15px;">Flexible Coordination</h3>
+                    <p style="color: var(--muted);">Suitable for single executive transfers, hourly support, or full event transport planning.</p>
+                </article>
+                <article class="card p-20" style="padding: 24px;">
+                    <h3 style="font-family: 'Playfair Display', serif; color: var(--champagne-soft); margin-bottom: 15px;">Singapore & Cross-Border</h3>
+                    <p style="color: var(--muted);">Well suited for local business movement and selected Malaysia corporate transfer needs.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="cta-box">
+                <div>
+                    <h2>Need transport planning for your next corporate event?</h2>
+                    <p style="max-width: 600px; color: #f1e5db;">
+                        Share your event date, venue schedule, pickup locations, guest count, and preferred vehicle type.
+                        Our team can prepare a tailored quotation for executive and event transport requirements.
+                    </p>
+                </div>
+                <div class="cta-actions">
+                    <a class="btn" href="https://wa.me/6584444744" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp For Quote</a>
+                    <a class="btn ghost" href="index.html#contact">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <h4>Glance Limousine</h4>
+                <p>Timeless chauffeur excellence across Singapore and Malaysia.</p>
+            </div>
+            <div>
+                <h4>Main Pages</h4><a href="index.html#home">Home</a><a href="index.html#sg-transfer">Singapore Transfer</a><a
+                    href="index.html#faq">FAQ</a><a href="index.html#contact">Contact</a>
+            </div>
+            <div>
+                <h4>Booking Pages</h4><a href="index.html#sg-tours">Singapore Tours</a><a href="index.html#my-tours">Malaysia Tours</a><a
+                    href="index.html#my-transfer">Malaysia Transfer</a><a href="index.html#shared">Seat In Coach</a>
+            </div>
+            <div>
+                <h4>Support</h4><a href="index.html#fleet">Fleet</a><a href="index.html#terms">Terms &amp; Conditions</a><a
+                    href="index.html#faq">FAQ</a><a href="index.html#contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="floating-dock"><a class="dock-wa" href="https://wa.me/6584444744" target="_blank">WhatsApp</a><a
+            class="dock-mail" href="mailto:admin@glancelimousine.com.sg">Email</a><a class="dock-call"
+            href="tel:+6584444744">Call</a><a class="dock-link" href="index.html#shared">Seat In Coach</a><a class="dock-link"
+            href="index.html#sg-tours">Singapore Tours</a><a class="dock-link" href="index.html#my-tours">Malaysia Tours</a><a
+            class="dock-link" href="index.html#my-transfer">Cross Border</a><a class="dock-link" href="index.html#terms">Terms</a></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

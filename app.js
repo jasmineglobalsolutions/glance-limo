@@ -268,7 +268,7 @@ function renderFleetCards(list, targetId, isApiData = false) {
               <h3>${title}</h3>
               ${extraInfo}
               <div class="action-row">
-                <button class="btn full" onclick="window.location.hash='#contact'">View and Book</button>
+                <button class="btn full" onclick="window.location.href='vehicle-detail.html'">View Detail</button>
               </div>
             </div>
           </div>
