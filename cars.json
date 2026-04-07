@@ -11,7 +11,6 @@
         "hasChildSeat": true,
         "pricePerHour": 195,
         "ratePerTransfer": 200,
-        "tenantId": "05a02a06-5361-4a47-aaae-f9b8bf49c380",
         "createdAt": "2025-06-23T11:56:37.929Z"
     },
     {
@@ -26,7 +25,6 @@
         "hasChildSeat": false,
         "pricePerHour": 155,
         "ratePerTransfer": 160,
-        "tenantId": "05a02a06-5361-4a47-aaae-f9b8bf49c380",
         "createdAt": "2025-06-23T11:58:59.825Z"
     },
     {
@@ -41,7 +39,6 @@
         "hasChildSeat": false,
         "pricePerHour": 90,
         "ratePerTransfer": 95,
-        "tenantId": "05a02a06-5361-4a47-aaae-f9b8bf49c380",
         "createdAt": "2025-06-23T12:02:12.810Z"
     },
     {
@@ -56,7 +53,6 @@
         "hasChildSeat": false,
         "pricePerHour": 105,
         "ratePerTransfer": 110,
-        "tenantId": "05a02a06-5361-4a47-aaae-f9b8bf49c380",
         "createdAt": "2025-06-23T12:52:37.692Z"
     },
     {
@@ -71,7 +67,6 @@
         "hasChildSeat": false,
         "pricePerHour": 90,
         "ratePerTransfer": 95,
-        "tenantId": "05a02a06-5361-4a47-aaae-f9b8bf49c380",
         "createdAt": "2025-06-23T12:55:48.945Z"
     },
     {
@@ -86,7 +81,6 @@
         "hasChildSeat": false,
         "pricePerHour": 70,
         "ratePerTransfer": 75,
-        "tenantId": "05a02a06-5361-4a47-aaae-f9b8bf49c380",
         "createdAt": "2025-06-24T00:14:56.447Z"
     },
     {
@@ -101,7 +95,6 @@
         "hasChildSeat": false,
         "pricePerHour": 70,
         "ratePerTransfer": 75,
-        "tenantId": "05a02a06-5361-4a47-aaae-f9b8bf49c380",
         "createdAt": "2025-06-24T00:18:30.698Z"
     },
     {
@@ -116,7 +109,6 @@
         "hasChildSeat": false,
         "pricePerHour": 70,
         "ratePerTransfer": 75,
-        "tenantId": "05a02a06-5361-4a47-aaae-f9b8bf49c380",
         "createdAt": "2025-06-24T00:25:03.852Z"
     },
     {
@@ -131,7 +123,6 @@
         "hasChildSeat": false,
         "pricePerHour": 70,
         "ratePerTransfer": 75,
-        "tenantId": "05a02a06-5361-4a47-aaae-f9b8bf49c380",
         "createdAt": "2025-06-24T00:28:46.892Z"
     },
     {
@@ -146,7 +137,6 @@
         "hasChildSeat": false,
         "pricePerHour": 125,
         "ratePerTransfer": 130,
-        "tenantId": "05a02a06-5361-4a47-aaae-f9b8bf49c380",
         "createdAt": "2025-06-24T00:40:14.079Z"
     },
     {
@@ -161,7 +151,6 @@
         "hasChildSeat": false,
         "pricePerHour": 60,
         "ratePerTransfer": 65,
-        "tenantId": "05a02a06-5361-4a47-aaae-f9b8bf49c380",
         "createdAt": "2025-06-24T00:30:55.627Z"
     },
     {
@@ -176,7 +165,6 @@
         "hasChildSeat": false,
         "pricePerHour": 65,
         "ratePerTransfer": 60,
-        "tenantId": "05a02a06-5361-4a47-aaae-f9b8bf49c380",
         "createdAt": "2025-06-24T00:32:44.742Z"
     },
     {
@@ -191,7 +179,6 @@
         "hasChildSeat": false,
         "pricePerHour": 90,
         "ratePerTransfer": 95,
-        "tenantId": "05a02a06-5361-4a47-aaae-f9b8bf49c380",
         "createdAt": "2025-06-24T00:35:20.715Z"
     },
     {
@@ -206,7 +193,6 @@
         "hasChildSeat": false,
         "pricePerHour": 85,
         "ratePerTransfer": 90,
-        "tenantId": "05a02a06-5361-4a47-aaae-f9b8bf49c380",
         "createdAt": "2025-06-24T00:38:40.871Z"
     },
     {
@@ -221,7 +207,6 @@
         "hasChildSeat": false,
         "pricePerHour": 155,
         "ratePerTransfer": 160,
-        "tenantId": "05a02a06-5361-4a47-aaae-f9b8bf49c380",
         "createdAt": "2025-06-24T00:41:51.121Z"
     }
 ]

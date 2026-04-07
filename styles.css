@@ -1471,7 +1471,8 @@ footer a {
     .contact-wrap,
     .transfer-wrap,
     .footer-grid,
-    .fleet-grid {
+    .fleet-grid,
+    .services-grid {
         grid-template-columns: 1fr 1fr
     }
 
@@ -1514,6 +1515,7 @@ footer a {
     .hero-inner,
     .hero-card-grid,
     .fleet-grid,
+    .services-grid,
     .detail-shell,
     .detail-gallery,
     .detail-list,
