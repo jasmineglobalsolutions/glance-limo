@@ -139,27 +139,26 @@ export function CrmDashboard({ adminEmail }: { adminEmail: string }) {
     if (!files.length) return;
     setUploading(true);
     try {
-      const formData = new FormData();
-      formData.append('file', files[0]);
-      formData.append('service', activeTab.toLowerCase());
-      const res = await fetch('/api/crm/uploads/image', { method: 'POST', body: formData });
-      const payload = await res.json();
-      if (payload.url) {
-        if (activeTab === 'SINGAPORE_TOURS' || activeTab === 'MALAYSIA_TOURS') {
-          setDraft((prev: any) => {
-            if (!prev.image) {
-              return { ...prev, image: payload.url };
-            } else {
-              return { 
-                ...prev, 
-                images: [...(prev.images || []), { imageUrl: payload.url }] 
-              };
-            }
-          });
-        } else if (activeTab === 'SINGAPORE_ATTRACTIONS') {
-           setDraft((prev: any) => ({ ...prev, imageUrl: payload.url }));
-        } else {
-          setDraft((prev: any) => ({ ...prev, imageUrl: payload.url }));
+      for (const file of files) {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('service', activeTab.toLowerCase());
+        const res = await fetch('/api/crm/uploads/image', { method: 'POST', body: formData });
+        const payload = await res.json();
+        if (payload.url) {
+          if (activeTab === 'SINGAPORE_TOURS' || activeTab === 'MALAYSIA_TOURS') {
+            setDraft((prev: any) => {
+              if (!prev.image) {
+                return { ...prev, image: payload.url };
+              } else {
+                return { ...prev, images: [...(prev.images || []), { imageUrl: payload.url }] };
+              }
+            });
+          } else if (activeTab === 'SINGAPORE_ATTRACTIONS') {
+            setDraft((prev: any) => ({ ...prev, imageUrl: payload.url }));
+          } else {
+            setDraft((prev: any) => ({ ...prev, imageUrl: payload.url }));
+          }
         }
       }
     } finally {
@@ -455,7 +454,7 @@ export function CrmDashboard({ adminEmail }: { adminEmail: string }) {
                 {(
                   <div className="mt-4">
                      <SectionDivider title="Media" icon={<ImageIcon size={16} />} />
-                     <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={e => handleUpload(Array.from(e.target.files||[]))} />
+                     <input type="file" ref={fileInputRef} className="hidden" accept="image/*" multiple onChange={e => handleUpload(Array.from(e.target.files||[]))} />
                      
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <button 

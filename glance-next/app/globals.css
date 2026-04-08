@@ -1784,7 +1784,7 @@ footer a {
 
 .service-dashboard__grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 24px;
 }
 
@@ -1794,12 +1794,20 @@ footer a {
 
 .service-dashboard__card {
     overflow: hidden;
-    border-radius: 28px;
-    border: 1px solid rgba(255, 255, 255, .07);
-    background: linear-gradient(180deg, rgba(29, 27, 30, .96), rgba(19, 18, 20, .98));
-    box-shadow: var(--shadow);
+    border-radius: 26px;
+    border: 1px solid rgba(255, 255, 255, .05);
+    background: linear-gradient(160deg, rgba(38, 33, 35, .96), rgba(18, 16, 17, .98));
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
     display: flex;
     flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+    cursor: pointer;
+}
+
+.service-dashboard__card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    border-color: rgba(212, 175, 55, 0.3); /* champagne hint */
 }
 
 .service-dashboard__card--compact h2 {
@@ -1808,57 +1816,85 @@ footer a {
 
 .service-dashboard__image-wrap {
     position: relative;
-    min-height: 250px;
+    min-height: 260px;
+    overflow: hidden;
+}
+
+.service-dashboard__image-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(to bottom, transparent 40%, rgba(18, 16, 17, 0.98) 100%);
 }
 
 .service-dashboard__image-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.service-dashboard__card:hover .service-dashboard__image-wrap img {
+    transform: scale(1.06);
 }
 
 .service-dashboard__image-badge {
     position: absolute;
-    left: 18px;
-    bottom: 18px;
-    padding: 8px 12px;
-    border-radius: 999px;
-    background: rgba(20, 15, 13, .75);
-    border: 1px solid rgba(255, 255, 255, .12);
+    top: 20px;
+    left: 20px;
+    padding: 6px 14px;
+    border-radius: 12px;
+    background: rgba(20, 15, 13, .65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, .15);
     color: var(--champagne-soft);
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 10;
 }
 
 .service-dashboard__card-body {
-    display: grid;
-    gap: 18px;
-    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 24px 28px;
+    flex: 1;
+    position: relative;
+    z-index: 10;
+    margin-top: -30px; /* pull body up over image gradient */
 }
 
 .service-dashboard__card-head {
     display: flex;
-    gap: 16px;
-    justify-content: space-between;
-    align-items: start;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 .service-dashboard__card-head h2,
 .service-detail__panel h2 {
     font-family: 'Playfair Display', serif;
     color: var(--white);
-    font-size: 1.9rem;
-    line-height: 1.05;
-    margin-top: 8px;
+    font-size: 2rem;
+    line-height: 1.1;
+    margin-top: 4px;
 }
 
 .service-dashboard__price-box,
 .service-detail__pricing-hero {
-    min-width: 190px;
-    padding: 16px 18px;
-    border-radius: 22px;
-    border: 1px solid rgba(255, 255, 255, .08);
-    background: rgba(255, 255, 255, .04);
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    min-width: 0;
 }
 
 .service-dashboard__price-box span,
@@ -1866,43 +1902,54 @@ footer a {
     display: block;
     color: var(--muted);
     font-size: 12px;
-    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
 }
 
 .service-dashboard__price-box strong,
 .service-detail__pricing-hero strong {
     display: block;
-    margin-top: 6px;
-    color: var(--champagne-soft);
-    font-size: 1.7rem;
+    color: var(--champagne);
+    font-size: 1.8rem;
     font-family: 'Playfair Display', serif;
 }
 
 .service-dashboard__description {
     color: var(--muted);
-    min-height: 74px;
+    font-size: 14px;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .service-dashboard__highlights {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 16px;
 }
 
 .service-dashboard__highlights span {
-    padding: 10px 12px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, .05);
-    border: 1px solid rgba(255, 255, 255, .08);
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: rgba(212, 175, 55, 0.08); /* champagne tint */
+    border: 1px solid rgba(212, 175, 55, 0.15);
     color: var(--champagne-soft);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
 .service-dashboard__facts {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
+    gap: 14px;
+    padding-top: 4px;
 }
 
 .service-dashboard__facts--detail {
@@ -1910,30 +1957,41 @@ footer a {
 }
 
 .service-dashboard__fact {
-    padding: 14px;
-    border-radius: 18px;
-    border: 1px solid rgba(255, 255, 255, .07);
-    background: rgba(255, 255, 255, .03);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .service-dashboard__fact span {
     display: block;
     color: var(--muted);
-    font-size: 12px;
-    margin-bottom: 6px;
+    font-size: 11px;
     text-transform: uppercase;
     letter-spacing: .08em;
 }
 
 .service-dashboard__fact strong {
     color: var(--white);
-    font-size: 15px;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .service-dashboard__actions {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
+    margin-top: auto;
+    padding-top: 14px;
+}
+
+.service-dashboard__actions .btn {
+    height: 44px;
+    padding: 0 16px;
+    font-size: 13px;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .service-dashboard__loading {
@@ -2126,7 +2184,6 @@ footer a {
     .service-dashboard__hero,
     .service-detail__hero,
     .service-detail__content,
-    .service-dashboard__grid,
     .service-dashboard__grid--compact {
         grid-template-columns: 1fr;
     }

@@ -14,9 +14,9 @@ export async function getPublicServiceCards(serviceSlug: string) {
   } else if (config.key === 'CROSS_BORDER_TRANSFER') {
     rawCards = await prisma.crossBorderTransfer.findMany({ orderBy: { createdAt: 'desc' } });
   } else if (config.key === 'SINGAPORE_TOURS') {
-    rawCards = await prisma.singaporeTour.findMany({ orderBy: { createdAt: 'desc' } });
+    rawCards = await prisma.singaporeTour.findMany({ orderBy: { createdAt: 'desc' }, include: { images: true } });
   } else if (config.key === 'MALAYSIA_TOURS') {
-    rawCards = await prisma.malaysiaTour.findMany({ orderBy: { createdAt: 'desc' } });
+    rawCards = await prisma.malaysiaTour.findMany({ orderBy: { createdAt: 'desc' }, include: { images: true } });
   } else if (config.key === 'SINGAPORE_ATTRACTIONS') {
     rawCards = await prisma.singaporeAttraction.findMany({ orderBy: { createdAt: 'desc' } });
   }
@@ -35,9 +35,9 @@ export async function getPublicServiceCardById(serviceSlug: string, cardId: stri
   } else if (config.key === 'CROSS_BORDER_TRANSFER') {
     card = await prisma.crossBorderTransfer.findUnique({ where: { id: cardId } });
   } else if (config.key === 'SINGAPORE_TOURS') {
-    card = await prisma.singaporeTour.findUnique({ where: { id: cardId } });
+    card = await prisma.singaporeTour.findUnique({ where: { id: cardId }, include: { images: true } });
   } else if (config.key === 'MALAYSIA_TOURS') {
-    card = await prisma.malaysiaTour.findUnique({ where: { id: cardId } });
+    card = await prisma.malaysiaTour.findUnique({ where: { id: cardId }, include: { images: true } });
   } else if (config.key === 'SINGAPORE_ATTRACTIONS') {
     card = await prisma.singaporeAttraction.findUnique({ where: { id: cardId } });
   }
@@ -47,7 +47,10 @@ export async function getPublicServiceCardById(serviceSlug: string, cardId: stri
 }
 
 export async function getPublicServiceCardBySlug(serviceSlug: string, slug: string) {
-  return getPublicServiceCardById(serviceSlug, extractServiceCardId(slug));
+  const { config, cards } = await getPublicServiceCards(serviceSlug);
+  const card = cards.find(c => c.slug === slug);
+  if (!card) notFound();
+  return { config, card };
 }
 
 function formatCurrency(amount: number) {
@@ -107,10 +110,13 @@ function mapToCard(config: any, raw: any): PublicServiceCard {
           { label: 'Child', value: formatCurrency(raw.childPrice) }
         ]
       },
-      highlights: [raw.duration, raw.serviceMode, 'Private tour guide'],
+      highlights: [raw.category || 'Tour', raw.serviceMode, 'Private Guide', raw.duration],
       facts: [
-        { label: 'Duration', value: raw.duration },
-        { label: 'Min. Pax', value: String(raw.minAdults) }
+        { label: 'Category', value: raw.category || 'General' },
+        { label: 'Duration', value: String(raw.duration) },
+        { label: 'Min. Pax', value: String(raw.minAdults) },
+        { label: 'Adult Price', value: formatCurrency(raw.adultPrice) },
+        { label: 'Child Price', value: formatCurrency(raw.childPrice) }
       ]
     };
   } else if (config.key === 'SINGAPORE_ATTRACTIONS') {
@@ -154,7 +160,11 @@ function mapToCard(config: any, raw: any): PublicServiceCard {
       transferRate: raw.ratePerTransfer,
       rate: `SGD ${raw.pricePerHour}/hr`
     } : null,
-    galleryImages: [],
+    galleryImages: Array.isArray(raw.images) ? raw.images.map((img: any) => ({
+      imageUrl: img.imageUrl,
+      altText: img.altText || null,
+      displayOrder: img.displayOrder || 0
+    })) : [],
     pricing
   };
 }

@@ -12,7 +12,7 @@ export function slugifySegment(value: string) {
 }
 
 export function buildServiceCardSlug(title: string, id: string) {
-  return `${slugifySegment(title)}--${id}`;
+  return slugifySegment(title);
 }
 
 export function extractServiceCardId(slug: string) {
@@ -20,10 +20,10 @@ export function extractServiceCardId(slug: string) {
     return slug;
   }
 
-  const delimiterIndex = slug.lastIndexOf('--');
+  const delimiterIndex = slug.lastIndexOf('-');
   if (delimiterIndex === -1) {
     return slug;
   }
 
-  return slug.slice(delimiterIndex + 2);
+  return slug.slice(delimiterIndex + 1);
 }

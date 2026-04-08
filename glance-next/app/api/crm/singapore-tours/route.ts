@@ -24,7 +24,12 @@ export async function POST(req: Request) {
     
     const tenant = await ensureDefaultTenant();
     const body = await req.json();
-    const { images, ...rest } = body;
+    // Debug: log received images
+    const { image, images, ...rest } = body;
+    
+    // The main image might come directly from `image` or from the first element of `images` if not present
+    const mainImageUrl = image || (Array.isArray(images) && images.length > 0 ? images[0].imageUrl : undefined);
+    const allImages = Array.isArray(images) && images.length > 0 ? images.map((img: any) => ({ imageUrl: img.imageUrl })) : [];
 
     const cleanRest = {
       ...rest,
@@ -38,14 +43,16 @@ export async function POST(req: Request) {
     delete cleanRest.createdAt;
     delete cleanRest.updatedAt;
 
-    const data = await (prisma.singaporeTour as any).create({ 
-      data: { 
-        ...cleanRest, 
+    console.log('[DEBUG] image field:', image);
+    console.log('[DEBUG] Received images array:', images);
+
+    const data = await (prisma.singaporeTour as any).create({
+      data: {
+        ...cleanRest,
         tenantId: tenant.id,
-        images: images ? {
-          create: images.map((img: any) => ({ imageUrl: img.imageUrl }))
-        } : undefined
-      } 
+        image: mainImageUrl,
+        images: allImages.length > 0 ? { create: allImages } : undefined,
+      },
     });
     return NextResponse.json({ data });
   } catch (err: any) {

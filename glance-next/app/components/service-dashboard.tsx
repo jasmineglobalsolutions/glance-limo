@@ -191,13 +191,13 @@ export function ServiceDashboard({
                     </p>
 
                     <div className="service-dashboard__highlights">
-                      {card.pricing.highlights.slice(0, 3).map((highlight) => (
+                      {card.pricing.highlights.map((highlight) => (
                         <span key={`${card.id}-${highlight}`}>{highlight}</span>
                       ))}
                     </div>
 
                     <div className="service-dashboard__facts">
-                      {card.pricing.facts.slice(0, 3).map((fact) => (
+                      {card.pricing.facts.map((fact) => (
                         <div className="service-dashboard__fact" key={`${card.id}-${fact.label}`}>
                           <span>{fact.label}</span>
                           <strong>{fact.value}</strong>
