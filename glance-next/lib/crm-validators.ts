@@ -91,7 +91,6 @@ export const serviceCardInputSchema = z.object({
   ctaHref: optionalTrimmedString,
   displayOrder: nonNegativeInt,
   isActive: z.boolean(),
-  carId: optionalTrimmedString,
   images: z.array(serviceCardImageInputSchema).default([]),
 });
 

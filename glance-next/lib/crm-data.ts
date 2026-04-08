@@ -5,7 +5,6 @@ import { prisma } from '@/lib/prisma';
 
 export const serviceCardInclude = Prisma.validator<Prisma.ServiceCardInclude>()({
   section: true,
-  singaporeTransfer: true,
   images: {
     orderBy: {
       displayOrder: 'asc',

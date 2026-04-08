@@ -12,9 +12,25 @@ export async function PUT(req: Request, context: any) {
     const tenant = await ensureDefaultTenant();
     const params = await context.params;
     const body = await req.json();
+    
+    // remove fields that should not be updated directly
+    const cleanBody = { ...body };
+    delete cleanBody.id;
+    delete cleanBody.tenant;
+    delete cleanBody.createdAt;
+    delete cleanBody.updatedAt;
+
+    // Type casting logic for numbers where present
+    if ('personCapacity' in cleanBody) cleanBody.personCapacity = Number(cleanBody.personCapacity);
+    if ('smallLuggage' in cleanBody) cleanBody.smallLuggage = Number(cleanBody.smallLuggage);
+    if ('bigLuggage' in cleanBody) cleanBody.bigLuggage = Number(cleanBody.bigLuggage);
+    if ('pricePerHour' in cleanBody) cleanBody.pricePerHour = Number(cleanBody.pricePerHour);
+    if ('ratePerTransfer' in cleanBody) cleanBody.ratePerTransfer = Number(cleanBody.ratePerTransfer);
+    if ('hasChildSeat' in cleanBody) cleanBody.hasChildSeat = Boolean(cleanBody.hasChildSeat);
+
     const data = await (prisma.singaporeTransfer as any).update({ 
       where: { id: params.id, tenantId: tenant.id }, 
-      data: body 
+      data: cleanBody 
     });
     return NextResponse.json({ data });
   } catch (err: any) {

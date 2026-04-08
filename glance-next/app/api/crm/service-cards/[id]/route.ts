@@ -22,7 +22,6 @@ function mapServiceCardInput(
     ctaHref: payload.ctaHref,
     displayOrder: payload.displayOrder,
     isActive: payload.isActive,
-    carId: payload.carId,
     tenantId,
   };
 }

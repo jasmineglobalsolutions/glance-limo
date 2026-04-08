@@ -123,13 +123,14 @@ model SingaporeTransfer {
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
   bookings        Booking[]
-  serviceCards    ServiceCard[]
   tenant          Tenant          @relation(fields: [tenantId], references: [id])
 }
 
 model CrossBorderTransfer {
   id            String    @id @default(cuid())
   destination   String
+  description   String?
+  imageUrl      String?
   distanceKm    Int
   priceEconomy  Float
   pricePremium  Float
@@ -149,6 +150,7 @@ model CrossBorderTransfer {
 model SingaporeTour {
   id            String    @id @default(cuid())
   title         String
+  description   String?
   category      String
   duration      String
   serviceMode   String
@@ -161,6 +163,7 @@ model SingaporeTour {
   tenantId      String
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+  images        TourImage[]
   bookings      Booking[]
   tenant        Tenant    @relation(fields: [tenantId], references: [id])
 }
@@ -168,6 +171,7 @@ model SingaporeTour {
 model MalaysiaTour {
   id            String    @id @default(cuid())
   title         String
+  description   String?
   category      String
   duration      String
   serviceMode   String
@@ -178,15 +182,34 @@ model MalaysiaTour {
   isActive      Boolean   @default(true)
   displayOrder  Int       @default(0)
   tenantId      String
-  createdAt     DateTime  @default(now())
+  createdAt     DateTime  @default(now()) 
   updatedAt     DateTime  @updatedAt
+  images        TourImage[]
   bookings      Booking[]
   tenant        Tenant    @relation(fields: [tenantId], references: [id])
+}
+
+model TourImage {
+  id              String         @id @default(cuid())
+  imageUrl        String
+  displayOrder    Int            @default(0)
+  createdAt       DateTime       @default(now())
+  
+  singaporeTourId String?
+  singaporeTour   SingaporeTour? @relation(fields: [singaporeTourId], references: [id], onDelete: Cascade)
+  
+  malaysiaTourId  String?
+  malaysiaTour    MalaysiaTour?  @relation(fields: [malaysiaTourId], references: [id], onDelete: Cascade)
+
+  @@index([singaporeTourId, displayOrder])
+  @@index([malaysiaTourId, displayOrder])
 }
 
 model SingaporeAttraction {
   id                String    @id @default(cuid())
   name              String
+  description       String?
+  imageUrl          String?
   category          String
   audience          String
   badge             String?
@@ -229,12 +252,10 @@ model ServiceCard {
   ctaHref      String?
   displayOrder Int                @default(0)
   isActive     Boolean            @default(true)
-  singaporeTransferId String?
   tenantId       String?
   createdAt      DateTime           @default(now())
   updatedAt      DateTime           @updatedAt
   bookings       Booking[]
-  singaporeTransfer SingaporeTransfer? @relation(fields: [singaporeTransferId], references: [id])
   images       ServiceCardImage[]
   section      ServiceSection     @relation(fields: [sectionId], references: [id], onDelete: Cascade)
   tenant       Tenant?            @relation(fields: [tenantId], references: [id])

@@ -63,20 +63,7 @@ export type CrmServiceCard = CrmTimestamped & {
   ctaHref: string | null;
   displayOrder: number;
   isActive: boolean;
-  singaporeTransferId: string | null;
   section: Pick<CrmServiceSection, 'id' | 'key' | 'name' | 'slug' | 'description' | 'isActive'>;
-  singaporeTransfer: Pick<
-    CrmSingaporeTransfer,
-    | 'id'
-    | 'name'
-    | 'category'
-    | 'imageUrl'
-    | 'personCapacity'
-    | 'smallLuggage'
-    | 'bigLuggage'
-    | 'pricePerHour'
-    | 'ratePerTransfer'
-  > | null;
   images: CrmServiceCardImage[];
 };
 
@@ -141,7 +128,6 @@ export type CrmServiceCardInput = {
   ctaHref: string;
   displayOrder: number;
   isActive: boolean;
-  singaporeTransferId: string;
   images: CrmServiceCardImageInput[];
 };
 
@@ -194,7 +180,6 @@ export function createEmptyServiceCardInput(sectionId = ''): CrmServiceCardInput
     ctaHref: '/book',
     displayOrder: 0,
     isActive: true,
-    singaporeTransferId: '',
     images: [],
   };
 }

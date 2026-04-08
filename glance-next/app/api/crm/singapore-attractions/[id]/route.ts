@@ -12,9 +12,21 @@ export async function PUT(req: Request, context: any) {
     const tenant = await ensureDefaultTenant();
     const params = await context.params;
     const body = await req.json();
+
+    const cleanBody = { ...body };
+    delete cleanBody.id;
+    delete cleanBody.tenant;
+    delete cleanBody.createdAt;
+    delete cleanBody.updatedAt;
+
+    if ('adultPublishPrice' in cleanBody) cleanBody.adultPublishPrice = Number(cleanBody.adultPublishPrice);
+    if ('childPublishPrice' in cleanBody) cleanBody.childPublishPrice = Number(cleanBody.childPublishPrice);
+    if ('adultOurPrice' in cleanBody) cleanBody.adultOurPrice = Number(cleanBody.adultOurPrice);
+    if ('childOurPrice' in cleanBody) cleanBody.childOurPrice = Number(cleanBody.childOurPrice);
+
     const data = await (prisma.singaporeAttraction as any).update({ 
       where: { id: params.id, tenantId: tenant.id }, 
-      data: body 
+      data: cleanBody 
     });
     return NextResponse.json({ data });
   } catch (err: any) {

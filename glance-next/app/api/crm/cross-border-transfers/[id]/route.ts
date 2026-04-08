@@ -12,9 +12,22 @@ export async function PUT(req: Request, context: any) {
     const tenant = await ensureDefaultTenant();
     const params = await context.params;
     const body = await req.json();
+
+    const cleanBody = { ...body };
+    delete cleanBody.id;
+    delete cleanBody.tenant;
+    delete cleanBody.createdAt;
+    delete cleanBody.updatedAt;
+
+    if ('distanceKm' in cleanBody) cleanBody.distanceKm = Number(cleanBody.distanceKm);
+    if ('priceEconomy' in cleanBody) cleanBody.priceEconomy = Number(cleanBody.priceEconomy);
+    if ('pricePremium' in cleanBody) cleanBody.pricePremium = Number(cleanBody.pricePremium);
+    if ('priceBusiness' in cleanBody) cleanBody.priceBusiness = Number(cleanBody.priceBusiness);
+    if ('priceLuxury' in cleanBody) cleanBody.priceLuxury = Number(cleanBody.priceLuxury);
+
     const data = await (prisma.crossBorderTransfer as any).update({ 
       where: { id: params.id, tenantId: tenant.id }, 
-      data: body 
+      data: cleanBody 
     });
     return NextResponse.json({ data });
   } catch (err: any) {

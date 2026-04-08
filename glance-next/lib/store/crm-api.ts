@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const crmApi = createApi({
   reducerPath: 'crmApi',
-  baseQuery: fetchBaseQuery({ baseUrl: '/api/crm/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: '/api/crm/', credentials: 'include' }),
   tagTypes: [
     'SingaporeTransfer',
     'CrossBorderTransfer',

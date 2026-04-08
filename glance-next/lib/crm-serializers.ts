@@ -95,7 +95,6 @@ export function serializeServiceCard(card: ServiceCardWithRelations): CrmService
     ctaHref: card.ctaHref,
     displayOrder: card.displayOrder,
     isActive: card.isActive,
-    singaporeTransferId: card.singaporeTransferId,
     createdAt: toIsoString(card.createdAt),
     updatedAt: toIsoString(card.updatedAt),
     section: {
@@ -106,19 +105,6 @@ export function serializeServiceCard(card: ServiceCardWithRelations): CrmService
       description: card.section.description,
       isActive: card.section.isActive,
     },
-    singaporeTransfer: card.singaporeTransfer
-      ? {
-          id: card.singaporeTransfer.id,
-          name: card.singaporeTransfer.name,
-          category: card.singaporeTransfer.category,
-          imageUrl: card.singaporeTransfer.imageUrl,
-          personCapacity: card.singaporeTransfer.personCapacity,
-          smallLuggage: card.singaporeTransfer.smallLuggage,
-          bigLuggage: card.singaporeTransfer.bigLuggage,
-          pricePerHour: card.singaporeTransfer.pricePerHour,
-          ratePerTransfer: card.singaporeTransfer.ratePerTransfer,
-        }
-      : null,
     images: card.images.map(serializeServiceCardImage),
   };
 }

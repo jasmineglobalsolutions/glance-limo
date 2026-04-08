@@ -146,7 +146,18 @@ export function CrmDashboard({ adminEmail }: { adminEmail: string }) {
       const payload = await res.json();
       if (payload.url) {
         if (activeTab === 'SINGAPORE_TOURS' || activeTab === 'MALAYSIA_TOURS') {
-          setDraft((prev: any) => ({ ...prev, image: payload.url }));
+          setDraft((prev: any) => {
+            if (!prev.image) {
+              return { ...prev, image: payload.url };
+            } else {
+              return { 
+                ...prev, 
+                images: [...(prev.images || []), { imageUrl: payload.url }] 
+              };
+            }
+          });
+        } else if (activeTab === 'SINGAPORE_ATTRACTIONS') {
+           setDraft((prev: any) => ({ ...prev, imageUrl: payload.url }));
         } else {
           setDraft((prev: any) => ({ ...prev, imageUrl: payload.url }));
         }
@@ -345,6 +356,9 @@ export function CrmDashboard({ adminEmail }: { adminEmail: string }) {
                     <FormField label="Destination" colSpan={2}>
                       <input required className={inputCls} value={draft.destination || ''} onChange={e => setDraft({...draft, destination: e.target.value})} placeholder="e.g. Johor Bahru" />
                     </FormField>
+                    <FormField label="Description" colSpan={2}>
+                      <textarea rows={3} className={`${inputCls} resize-none`} value={draft.description || ''} onChange={e => setDraft({...draft, description: e.target.value})} placeholder="Describe the route highlights..." />
+                    </FormField>
                     <FormField label="Distance (km)" colSpan={2}>
                       <input required type="number" className={inputCls} value={draft.distanceKm || 0} onChange={e => setDraft({...draft, distanceKm: +e.target.value})} placeholder="0" />
                     </FormField>
@@ -371,6 +385,9 @@ export function CrmDashboard({ adminEmail }: { adminEmail: string }) {
                     <SectionDivider title="Event Info" icon={<Info size={16} />} />
                     <FormField label="Tour Title" colSpan={2}>
                       <input required className={inputCls} value={draft.title || ''} onChange={e => setDraft({...draft, title: e.target.value})} placeholder="e.g. Sentosa Adventure" />
+                    </FormField>
+                    <FormField label="Description" colSpan={2}>
+                      <textarea rows={3} className={`${inputCls} resize-none`} value={draft.description || ''} onChange={e => setDraft({...draft, description: e.target.value})} placeholder="Describe the tour highlights..." />
                     </FormField>
                     <FormField label="Category">
                       <input required className={inputCls} value={draft.category || ''} onChange={e => setDraft({...draft, category: e.target.value})} placeholder="e.g. Family, Night" />
@@ -402,6 +419,9 @@ export function CrmDashboard({ adminEmail }: { adminEmail: string }) {
                     <FormField label="Attraction Name" colSpan={2}>
                       <input required className={inputCls} value={draft.name || ''} onChange={e => setDraft({...draft, name: e.target.value})} placeholder="e.g. Universal Studios" />
                     </FormField>
+                    <FormField label="Description" colSpan={2}>
+                      <textarea rows={3} className={`${inputCls} resize-none`} value={draft.description || ''} onChange={e => setDraft({...draft, description: e.target.value})} placeholder="Describe the attraction highlights..." />
+                    </FormField>
                     <FormField label="Category">
                       <input required className={inputCls} value={draft.category || ''} onChange={e => setDraft({...draft, category: e.target.value})} placeholder="e.g. Sentosa"/>
                     </FormField>
@@ -431,45 +451,76 @@ export function CrmDashboard({ adminEmail }: { adminEmail: string }) {
                 )}
 
                 {/* Media Uploader */}
-                {activeTab !== 'CROSS_BORDER_TRANSFER' && activeTab !== 'SINGAPORE_ATTRACTIONS' && (
+{/* Media Uploader */}
+                {(
                   <div className="mt-4">
                      <SectionDivider title="Media" icon={<ImageIcon size={16} />} />
                      <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={e => handleUpload(Array.from(e.target.files||[]))} />
                      
-                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                       <button 
-                         type="button"
-                         onClick={() => fileInputRef.current?.click()}
-                         disabled={uploading}
-                         className="h-32 w-full border-2 border-dashed border-white/10 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-white/5 hover:border-amber-500/50 transition-all cursor-pointer text-slate-400 group"
-                       >
-                         {uploading ? <RefreshCw className="animate-spin text-amber-500 min-w-8 min-h-8" /> : (
-                           <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-amber-500/20 group-hover:text-amber-400 transition-colors">
-                             <Upload size={18} />
-                           </div>
-                         )}
-                         <span className="text-xs font-medium tracking-wide">Upload Image</span>
-                       </button>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <button 
+                          type="button"
+                          onClick={() => fileInputRef.current?.click()}
+                          disabled={uploading}
+                          className="h-32 w-full border-2 border-dashed border-white/10 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-white/5 hover:border-amber-500/50 transition-all cursor-pointer text-slate-400 group"
+                        >
+                          {uploading ? <RefreshCw className="animate-spin text-amber-500 min-w-8 min-h-8" /> : (
+                            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-amber-500/20 group-hover:text-amber-400 transition-colors">
+                              <Upload size={18} />
+                            </div>
+                          )}
+                          <span className="text-xs font-medium tracking-wide">Add { (activeTab.includes('TOUR')) ? 'Gallery' : '' } Image</span>
+                        </button>
 
-                       {(draft.imageUrl || draft.image) ? (
-                         <div className="h-32 relative rounded-2xl overflow-hidden border border-white/10 group shadow-lg">
-                           <img src={draft.imageUrl || draft.image} className="w-full h-full object-cover" alt="Preview"/>
-                           <div className="absolute inset-0 bg-black/60 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity flex">
-                            <button type="button" onClick={() => {
-                              if (draft.imageUrl) setDraft({...draft, imageUrl: ''});
-                              if (draft.image) setDraft({...draft, image: ''});
-                            }} className="bg-red-500 hover:bg-red-600 text-white p-3 rounded-full shadow-lg transition-transform hover:scale-110">
-                              <Trash2 size={16}/>
-                            </button>
-                           </div>
-                         </div>
-                       ) : (
-                         <div className="h-32 rounded-2xl border border-white/5 bg-black/20 flex flex-col items-center justify-center text-slate-600 gap-2">
-                           <ImageIcon size={24} className="opacity-50" />
-                           <span className="text-xs font-medium">No image uploaded</span>
-                         </div>
-                       )}
-                     </div>
+                        {/* Existing Single Image (Transfers/Attractions) */}
+                        {!activeTab.includes('TOUR') && draft.imageUrl && (
+                          <div className="h-32 relative rounded-2xl overflow-hidden border border-white/10 group shadow-lg">
+                            <img src={draft.imageUrl} className="w-full h-full object-cover" alt="Preview"/>
+                            <div className="absolute inset-0 bg-black/60 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity flex">
+                             <button type="button" onClick={() => setDraft({...draft, imageUrl: ''})} className="bg-red-500 hover:bg-red-600 text-white p-3 rounded-full shadow-lg transition-transform hover:scale-110">
+                               <Trash2 size={16}/>
+                             </button>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Main Image (Tours) */}
+                        {activeTab.includes('TOUR') && draft.image && (
+                          <div className="h-32 relative rounded-2xl overflow-hidden border border-amber-500/50 group shadow-lg">
+                            <div className="absolute top-2 left-2 z-10 bg-amber-500 text-black text-[10px] font-bold px-2 py-0.5 rounded-full">MAIN</div>
+                            <img src={draft.image} className="w-full h-full object-cover" alt="Main"/>
+                            <div className="absolute inset-0 bg-black/60 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity flex">
+                             <button type="button" onClick={() => setDraft({...draft, image: ''})} className="bg-red-500 hover:bg-red-600 text-white p-3 rounded-full shadow-lg transition-transform hover:scale-110">
+                               <Trash2 size={16}/>
+                             </button>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Gallery Images (Tours) */}
+                        {activeTab.includes('TOUR') && draft.images?.map((img: any, idx: number) => (
+                          <div key={idx} className="h-32 relative rounded-2xl overflow-hidden border border-white/10 group shadow-lg">
+                            <img src={img.imageUrl} className="w-full h-full object-cover" alt="Preview"/>
+                            <div className="absolute inset-0 bg-black/60 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity flex">
+                             <button type="button" onClick={() => {
+                               const next = [...(draft.images || [])];
+                               next.splice(idx, 1);
+                               setDraft({...draft, images: next});
+                             }} className="bg-red-500 hover:bg-red-600 text-white p-3 rounded-full shadow-lg transition-transform hover:scale-110">
+                               <Trash2 size={16}/>
+                             </button>
+                            </div>
+                          </div>
+                        ))}
+
+                        {/* Placeholder if empty */}
+                        {!draft.imageUrl && (!draft.images || draft.images.length === 0) && (
+                          <div className="h-32 rounded-2xl border border-white/5 bg-black/20 flex flex-col items-center justify-center text-slate-600 gap-2">
+                            <ImageIcon size={24} className="opacity-50" />
+                            <span className="text-xs font-medium">No images uploaded</span>
+                          </div>
+                        )}
+                      </div>
                   </div>
                 )}
 
@@ -510,9 +561,9 @@ export function CrmDashboard({ adminEmail }: { adminEmail: string }) {
                     <div key={item.id} className="glass-panel p-5 rounded-2xl flex flex-col gap-4 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange-500/5 transition-all outline outline-1 outline-transparent hover:outline-white/10 group">
                       
                       <div className="flex gap-4">
-                        {(item.imageUrl || item.image) ? (
+                        {(item.imageUrl || (item.images && item.images.length > 0)) ? (
                           <div className="w-20 h-20 rounded-xl bg-black/40 overflow-hidden border border-white/10 shrink-0 shadow-inner">
-                            <img src={item.imageUrl || item.image} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt=""/>
+                            <img src={item.imageUrl || item.images[0].imageUrl} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt=""/>
                           </div>
                         ) : (
                           <div className="w-20 h-20 rounded-xl bg-black/40 flex items-center justify-center border border-white/10 shrink-0 text-slate-700 shadow-inner">

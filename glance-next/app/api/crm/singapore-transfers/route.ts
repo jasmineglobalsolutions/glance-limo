@@ -27,8 +27,28 @@ export async function POST(req: Request) {
     
     const tenant = await ensureDefaultTenant();
     const body = await req.json();
+    
+    // Provide sensible defaults for missing fields from the frontend draft
+    const cleanBody = {
+      ...body,
+      name: body.name || 'Unnamed Vehicle',
+      category: body.category || 'LUXURY',
+      personCapacity: Number(body.personCapacity) || 0,
+      smallLuggage: Number(body.smallLuggage) || 0,
+      bigLuggage: Number(body.bigLuggage) || 0,
+      pricePerHour: Number(body.pricePerHour) || 0,
+      ratePerTransfer: Number(body.ratePerTransfer) || 0,
+      hasChildSeat: Boolean(body.hasChildSeat),
+    };
+    
+    // remove fields that shouldn't be overridden
+    delete cleanBody.id;
+    delete cleanBody.tenant;
+    delete cleanBody.createdAt;
+    delete cleanBody.updatedAt;
+
     const data = await (prisma.singaporeTransfer as any).create({ 
-      data: { ...body, tenantId: tenant.id } 
+      data: { ...cleanBody, tenantId: tenant.id } 
     });
     return NextResponse.json({ data });
   } catch (err: any) {

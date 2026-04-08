@@ -23,8 +23,24 @@ export async function POST(req: Request) {
     
     const tenant = await ensureDefaultTenant();
     const body = await req.json();
+
+    const cleanBody = {
+      ...body,
+      destination: body.destination || 'Unnamed Route',
+      distanceKm: Number(body.distanceKm) || 0,
+      priceEconomy: Number(body.priceEconomy) || 0,
+      pricePremium: Number(body.pricePremium) || 0,
+      priceBusiness: Number(body.priceBusiness) || 0,
+      priceLuxury: Number(body.priceLuxury) || 0,
+    };
+    
+    delete cleanBody.id;
+    delete cleanBody.tenant;
+    delete cleanBody.createdAt;
+    delete cleanBody.updatedAt;
+
     const data = await (prisma.crossBorderTransfer as any).create({ 
-      data: { ...body, tenantId: tenant.id } 
+      data: { ...cleanBody, tenantId: tenant.id } 
     });
     return NextResponse.json({ data });
   } catch (err: any) {

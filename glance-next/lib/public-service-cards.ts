@@ -136,7 +136,7 @@ function mapToCard(config: any, raw: any): PublicServiceCard {
     slug: buildServiceCardSlug(raw.name || raw.title || raw.destination || 'service', raw.id),
     title: raw.name || raw.title || raw.destination,
     subtitle: raw.category || raw.serviceMode || (raw.distanceKm ? `${raw.distanceKm} km` : null),
-    description: null,
+    description: raw.description || null,
     imageUrl: raw.imageUrl || raw.image || null,
     ctaLabel: 'Book Now',
     ctaHref: '/book',

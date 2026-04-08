@@ -11,6 +11,7 @@ export async function GET() {
   const tenant = await ensureDefaultTenant();
   const data = await (prisma.singaporeTour as any).findMany({ 
     where: { tenantId: tenant.id },
+    include: { images: true },
     orderBy: { createdAt: 'desc' } 
   });
   return NextResponse.json({ data });
@@ -23,8 +24,28 @@ export async function POST(req: Request) {
     
     const tenant = await ensureDefaultTenant();
     const body = await req.json();
+    const { images, ...rest } = body;
+
+    const cleanRest = {
+      ...rest,
+      title: rest.title || 'Unnamed Tour',
+      adultPrice: Number(rest.adultPrice) || 0,
+      childPrice: Number(rest.childPrice) || 0,
+      minAdults: Number(rest.minAdults) || 2,
+    };
+    delete cleanRest.id;
+    delete cleanRest.tenant;
+    delete cleanRest.createdAt;
+    delete cleanRest.updatedAt;
+
     const data = await (prisma.singaporeTour as any).create({ 
-      data: { ...body, tenantId: tenant.id } 
+      data: { 
+        ...cleanRest, 
+        tenantId: tenant.id,
+        images: images ? {
+          create: images.map((img: any) => ({ imageUrl: img.imageUrl }))
+        } : undefined
+      } 
     });
     return NextResponse.json({ data });
   } catch (err: any) {
