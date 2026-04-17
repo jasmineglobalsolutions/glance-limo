@@ -9,15 +9,13 @@ import {
   incrementItem,
   openCart,
   removeItem,
-} from '@/lib/store/cart-slice';
+} from '@/lib/store/features/cart/cart-slice';
 import { useAppDispatch, useAppSelector } from '@/lib/store/hooks';
-
-function formatCurrency(amount: number) {
-  return `SGD ${amount.toFixed(0)}`;
-}
+import { useCurrencyFormatter } from '@/lib/store/hooks/useCurrencyFormatter';
 
 export function SiteCartDrawer() {
   const dispatch = useAppDispatch();
+  const format = useCurrencyFormatter();
   const { isOpen, items } = useAppSelector((state) => state.cart);
   const itemCount = items.reduce((total, item) => total + item.quantity, 0);
   const totalAmount = items.reduce((total, item) => {
@@ -72,7 +70,7 @@ export function SiteCartDrawer() {
               <div className="cart-item" key={item.id}>
                 <strong>{item.title}</strong>
                 <span>{item.serviceName}</span>
-                <span>{item.unitPrice === null ? item.priceLabel : formatCurrency(item.unitPrice)}</span>
+                <span>{item.unitPrice === null ? item.priceLabel : format(item.unitPrice)}</span>
                 <div className="service-dashboard__cart-actions">
                   <div className="service-dashboard__qty">
                     <button onClick={() => dispatch(decrementItem(item.id))} type="button">
@@ -99,7 +97,7 @@ export function SiteCartDrawer() {
 
         <div className="cart-total">
           <span>Estimated total</span>
-          <strong>{items.length === 0 ? 'SGD 0' : formatCurrency(totalAmount)}</strong>
+          <strong>{items.length === 0 ? format(0) : format(totalAmount)}</strong>
         </div>
 
         {hasQuotedItem ? (

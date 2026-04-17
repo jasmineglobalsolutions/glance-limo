@@ -7,7 +7,8 @@ import { SiteCartDrawer } from '@/app/components/site-cart-drawer';
 import {
   CART_STORAGE_KEY,
   hydrateCart,
-} from '@/lib/store/cart-slice';
+} from '@/lib/store/features/cart/cart-slice';
+import { fetchRates } from '@/lib/store/features/currency/currency-slice';
 import { useAppDispatch, useAppSelector } from '@/lib/store/hooks';
 import { makeStore, type AppStore } from '@/lib/store/store';
 
@@ -40,6 +41,19 @@ function CartPersistence() {
   return null;
 }
 
+function CurrencyBootstrap() {
+  const dispatch = useAppDispatch();
+  const status = useAppSelector((state) => state.currency.status);
+
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchRates());
+    }
+  }, [dispatch, status]);
+
+  return null;
+}
+
 export function SiteStoreProvider({
   children,
 }: {
@@ -50,6 +64,7 @@ export function SiteStoreProvider({
   return (
     <Provider store={store}>
       <CartPersistence />
+      <CurrencyBootstrap />
       {children}
       <SiteCartDrawer />
     </Provider>

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import { Playfair_Display, Roboto } from 'next/font/google';
 
 import Footer from '../components/Footer';
@@ -42,13 +42,15 @@ export default function SiteLayout({
         />
       </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <div className="topbar">
-          Premium chauffeur service · airport transfers · private tours ·
-          cross-border Singapore-Malaysia
-        </div>
-        <Navbar />
-        <SiteStoreProvider>{children}</SiteStoreProvider>
-        <Footer />
+        <SiteStoreProvider>
+          <div className="topbar">
+            Premium chauffeur service | airport transfers | private tours |
+            cross-border Singapore-Malaysia
+          </div>
+          <Navbar />
+          {children}
+          <Footer />
+        </SiteStoreProvider>
         <script src="/app.js" async></script>
       </body>
     </html>

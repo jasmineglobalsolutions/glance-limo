@@ -6,8 +6,9 @@ import { useDeferredValue, useState } from 'react';
 
 import { createCartItem } from '@/lib/public-cart';
 import type { PublicServiceCard } from '@/lib/public-service-types';
-import { addItem, openCart } from '@/lib/store/cart-slice';
+import { addItem, openCart } from '@/lib/store/features/cart/cart-slice';
 import { useAppDispatch, useAppSelector } from '@/lib/store/hooks';
+import { useCurrencyFormatter } from '@/lib/store/hooks/useCurrencyFormatter';
 
 type ServiceDashboardProps = {
   config: {
@@ -17,19 +18,12 @@ type ServiceDashboardProps = {
   cards: PublicServiceCard[];
 };
 
-function formatCurrency(amount: number | null) {
-  if (amount === null) {
-    return 'Custom quote';
-  }
-
-  return `SGD ${amount.toFixed(0)}`;
-}
-
 export function ServiceDashboard({
   config,
   cards,
 }: ServiceDashboardProps) {
   const dispatch = useAppDispatch();
+  const format = useCurrencyFormatter();
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState<'all' | 'priced' | 'quote'>('all');
   const deferredSearch = useDeferredValue(search.trim().toLowerCase());
@@ -102,7 +96,7 @@ export function ServiceDashboard({
               <span>Best starting rate</span>
               <strong>
                 {lowestPricedCard
-                  ? formatCurrency(lowestPricedCard.pricing.summary.amount)
+                  ? format(lowestPricedCard.pricing.summary.amount)
                   : 'Quote'}
               </strong>
               <p>
@@ -164,11 +158,20 @@ export function ServiceDashboard({
             {filteredCards.map((card) => {
               const heroImage =
                 card.imageUrl ?? card.galleryImages[0]?.imageUrl ?? '/logo.webp';
+              const isCarCard = card.car !== null || card.sectionKey === 'SINGAPORE_TRANSFER';
 
               return (
                 <article className="service-dashboard__card" key={card.id}>
-                  <div className="service-dashboard__image-wrap">
-                    <img alt={card.title} src={heroImage} />
+                  <div
+                    className={`service-dashboard__image-wrap${
+                      isCarCard ? ' service-dashboard__image-wrap--car' : ''
+                    }`}
+                  >
+                    <img
+                      alt={card.title}
+                      className={isCarCard ? 'service-dashboard__image--car' : undefined}
+                      src={heroImage}
+                    />
                     <div className="service-dashboard__image-badge">
                       {card.badge ?? card.serviceName}
                     </div>
@@ -182,7 +185,7 @@ export function ServiceDashboard({
                       </div>
                       <div className="service-dashboard__price-box">
                         <span>{card.pricing.summary.subline}</span>
-                        <strong>{card.pricing.summary.headline}</strong>
+                        <strong>{format(card.pricing.summary.amount)}</strong>
                       </div>
                     </div>
 

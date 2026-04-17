@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { cartReducer } from '@/lib/store/cart-slice';
+import { cartReducer } from '@/lib/store/features/cart/cart-slice';
+import { currencyReducer } from '@/lib/store/features/currency/currency-slice';
 
 export function makeStore() {
   return configureStore({
     reducer: {
       cart: cartReducer,
+      currency: currencyReducer,
     },
   });
 }

@@ -1,7 +1,11 @@
 'use client';
+/* eslint-disable @next/next/no-img-element */
+
 import Link from 'next/link';
+
 import { useAppDispatch } from '@/lib/store/hooks';
-import { addItem, openCart } from '@/lib/store/cart-slice';
+import { addItem } from '@/lib/store/features/cart/cart-slice';
+
 import { createCartItem } from '@/lib/public-cart';
 import type { PublicServiceCard } from '@/lib/public-service-types';
 
@@ -25,10 +29,15 @@ export function ServicePreview({ config, cards, previewCount = 3 }: ServicePrevi
         <div className="services-grid">
           {previewCards.map((card) => {
             const heroImage = card.imageUrl ?? card.galleryImages[0]?.imageUrl ?? '/logo.webp';
+            const isCarCard = card.car !== null || card.sectionKey === 'SINGAPORE_TRANSFER';
             return (
               <article className="service-card" key={card.id}>
-                <div className="service-card-image">
-                  <img src={heroImage} alt={card.title} className="w-full h-48 object-cover rounded" />
+                <div className={`service-card-image${isCarCard ? ' service-card-image--car' : ''}`}>
+                  <img
+                    alt={card.title}
+                    className={isCarCard ? 'service-card-image__img--car' : 'w-full h-48 object-cover rounded'}
+                    src={heroImage}
+                  />
                 </div>
                 <h3 className="mt-4 text-lg font-semibold text-white">{card.title}</h3>
                 <p className="mt-2 text-sm text-muted">{card.subtitle}</p>

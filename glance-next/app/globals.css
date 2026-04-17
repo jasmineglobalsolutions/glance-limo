@@ -1835,8 +1835,33 @@ footer a {
     transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+.service-dashboard__image-wrap--car {
+    min-height: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background:
+        radial-gradient(circle at center, rgba(255, 255, 255, .14), rgba(255, 255, 255, .02) 68%),
+        linear-gradient(160deg, rgba(43, 39, 45, .96), rgba(23, 21, 24, .98));
+}
+
+.service-dashboard__image-wrap--car::after {
+    display: none;
+}
+
+.service-dashboard__image--car {
+    object-fit: contain !important;
+    max-height: 100%;
+    filter: drop-shadow(0 10px 26px rgba(0, 0, 0, .42));
+}
+
 .service-dashboard__card:hover .service-dashboard__image-wrap img {
     transform: scale(1.06);
+}
+
+.service-dashboard__card:hover .service-dashboard__image--car {
+    transform: scale(1.03) translateY(-2px);
 }
 
 .service-dashboard__image-badge {
@@ -2051,6 +2076,21 @@ footer a {
     object-fit: cover;
 }
 
+.service-detail__active-image--car {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background:
+        radial-gradient(circle at center, rgba(255, 255, 255, .1), rgba(255, 255, 255, .02) 72%),
+        linear-gradient(160deg, rgba(40, 36, 42, .95), rgba(20, 18, 22, .98));
+}
+
+.service-detail__image--car {
+    object-fit: contain !important;
+    filter: drop-shadow(0 12px 28px rgba(0, 0, 0, .42));
+}
+
 .service-detail__thumbs {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2077,6 +2117,15 @@ footer a {
     width: 100%;
     height: 94px;
     object-fit: cover;
+}
+
+.service-detail__thumb--car {
+    background: rgba(255, 255, 255, .04);
+    padding: 8px;
+}
+
+.service-detail__thumb-image--car {
+    object-fit: contain !important;
 }
 
 .service-detail__heading span,
@@ -2221,5 +2270,177 @@ footer a {
 
     .service-detail__active-image {
         min-height: 280px;
+    }
+}
+
+.nav-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.currency-switch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 14px;
+    background: rgba(18, 17, 20, .72);
+    backdrop-filter: blur(8px);
+}
+
+.currency-switch__label {
+    color: var(--champagne-soft);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.currency-switch__select-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.currency-switch__select {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .06);
+    color: #fff;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .03em;
+    padding: 8px 34px 8px 12px;
+    min-width: 136px;
+    cursor: pointer;
+}
+
+.currency-switch__select:focus {
+    outline: none;
+    border-color: rgba(168, 144, 128, .7);
+    box-shadow: 0 0 0 3px rgba(168, 144, 128, .22);
+}
+
+.currency-switch__select-wrap::after {
+    content: '';
+    position: absolute;
+    right: 28px;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid rgba(255, 255, 255, .8);
+    border-bottom: 2px solid rgba(255, 255, 255, .8);
+    transform: rotate(45deg) translateY(-2px);
+    pointer-events: none;
+}
+
+.currency-switch__status {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #9a9a9a;
+}
+
+.currency-switch__status--loading {
+    background: #f0c36b;
+}
+
+.currency-switch__status--success {
+    background: #6bd79c;
+}
+
+.currency-switch__status--error {
+    background: #ff5d5d;
+}
+
+.mini-copy--booking {
+    margin-bottom: 12px;
+}
+
+.detail-warning {
+    margin-top: 12px;
+    border-color: #ff4d4d;
+    color: #ffadad;
+    background: rgba(255, 77, 77, .08);
+}
+
+.service-detail__summary .price-pill {
+    min-height: 98px;
+    display: grid;
+    align-content: center;
+    gap: 6px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .03));
+}
+
+.service-detail__summary .price-pill strong {
+    font-size: clamp(1.4rem, 2.2vw, 2rem);
+    line-height: 1.15;
+}
+
+.service-detail__summary .detail-pricing .price-pill strong {
+    font-size: clamp(1.1rem, 1.8vw, 1.55rem);
+}
+
+.service-detail__summary .booking-builder {
+    background: linear-gradient(160deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .03));
+}
+
+.detail-cta .btn:disabled {
+    opacity: .45;
+    filter: grayscale(0.3);
+    cursor: not-allowed;
+    transform: none;
+}
+
+.service-card-image {
+    width: 100%;
+    height: 192px;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.service-card-image--car {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    background:
+        radial-gradient(circle at center, rgba(255, 255, 255, .12), rgba(255, 255, 255, .02) 72%),
+        linear-gradient(160deg, rgba(36, 32, 37, .95), rgba(19, 17, 19, .98));
+}
+
+.service-card-image__img--car {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 24px rgba(0, 0, 0, .38));
+}
+
+@media (max-width:1180px) {
+    .nav-right {
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .currency-switch {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width:768px) {
+    .currency-switch {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .currency-switch__select {
+        min-width: 122px;
+        font-size: 12px;
     }
 }
