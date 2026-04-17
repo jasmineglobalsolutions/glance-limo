@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Singapore Attractions | Glance Limousine</title>
+  <meta name="description" content="Book Singapore attraction tickets with adult and child pricing, premium presentation and seamless checkout options." />
+  <style>
+    :root{
+      --bg:#0f0c09;
+      --bg2:#17120d;
+      --panel:rgba(255,255,255,0.05);
+      --panel2:rgba(255,255,255,0.03);
+      --gold:#c9a961;
+      --gold2:#ecd39a;
+      --text:#f6f0e6;
+      --muted:#c8bba6;
+      --line:rgba(201,169,97,0.20);
+      --radius-xl:28px;
+      --radius-lg:20px;
+      --radius-md:14px;
+      --shadow:0 20px 50px rgba(0,0,0,.35);
+      --max:1300px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Inter, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(201,169,97,.10), transparent 28%),
+        radial-gradient(circle at top left, rgba(255,255,255,.04), transparent 20%),
+        linear-gradient(180deg,#0f0c09 0%,#15100c 55%,#0f0c09 100%);
+      color:var(--text);
+      line-height:1.55;
+    }
+
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    .container{width:min(var(--max),calc(100% - 32px));margin:0 auto}
+
+    .topbar{
+      position:sticky;top:0;z-index:1000;
+      background:rgba(15,12,9,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .nav{
+      min-height:76px;
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+    }
+
+    .brand-title{
+      font-size:1.22rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gold2)
+    }
+    .brand-sub{
+      font-size:.82rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:2px
+    }
+
+    .nav-links{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+    .nav-links a{color:rgba(255,255,255,.88);font-size:.95rem}
+    .nav-links a:hover,.nav-links a.active{color:var(--gold)}
+
+    .nav-cta,.btn-primary,.btn-secondary,.btn-ghost{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-height:48px;padding:0 20px;border-radius:999px;font-weight:700;transition:.25s ease;
+      cursor:pointer;border:none;
+    }
+    .nav-cta,.btn-primary{
+      background:linear-gradient(135deg,#f0d79e,#c9a961);
+      color:#120e09;
+      box-shadow:var(--shadow);
+    }
+    .btn-secondary{
+      border:1px solid rgba(201,169,97,.34);
+      color:var(--gold2);
+      background:rgba(255,255,255,.04);
+    }
+    .btn-ghost{
+      border:1px solid rgba(255,255,255,.12);
+      color:var(--text);
+      background:rgba(255,255,255,.03);
+    }
+    .btn-primary:hover,.btn-secondary:hover,.btn-ghost:hover,.nav-cta:hover{transform:translateY(-1px)}
+
+    .hero{padding:84px 0 44px}
+    .hero-wrap{
+      display:grid;grid-template-columns:1.2fr .8fr;gap:24px;
+    }
+    .hero-copy,.hero-side{
+      background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius:var(--radius-xl);
+      box-shadow:var(--shadow);
+    }
+    .hero-copy{padding:46px}
+    .eyebrow{
+      color:var(--gold);font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px
+    }
+    .hero h1{
+      font-family:"Cormorant Garamond", Georgia, serif;
+      font-size:clamp(2.4rem,4vw,4.3rem);
+      line-height:1.04;
+      margin-bottom:16px;
+    }
+    .hero p{color:var(--muted);font-size:1.04rem;max-width:760px;margin-bottom:24px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+    .hero-side{padding:24px;display:grid;gap:14px;align-content:center}
+    .mini{
+      padding:18px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(201,169,97,.14)
+    }
+    .mini h3{font-size:1rem;color:var(--gold2);margin-bottom:6px}
+    .mini p{color:var(--muted);font-size:.92rem}
+
+    .section{padding:28px 0 70px}
+    .section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;flex-wrap:wrap;margin-bottom:24px}
+    .section-head h2{
+      font-family:"Cormorant Garamond", Georgia, serif;
+      font-size:clamp(1.9rem,2.6vw,3rem);
+      line-height:1.08;margin-bottom:6px
+    }
+    .section-head p{color:var(--muted);max-width:780px}
+
+    .toolbar{
+      display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:12px;margin-bottom:22px
+    }
+    .toolbar input,.toolbar select{
+      width:100%;min-height:50px;padding:0 14px;border-radius:14px;
+      border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text)
+    }
+    .toolbar input::placeholder{color:#b8aa94}
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:22px;
+    }
+
+    .card{
+      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.025));
+      border:1px solid var(--line);
+      border-radius:var(--radius-xl);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      transition:.25s ease;
+    }
+    .card:hover{transform:translateY(-4px);border-color:rgba(201,169,97,.34)}
+
+    .card-image{
+      height:220px;
+      background:linear-gradient(135deg,rgba(201,169,97,.14),rgba(255,255,255,.04));
+      position:relative;
+      overflow:hidden;
+    }
+    .card-image img{width:100%;height:100%;object-fit:cover}
+    .badge{
+      position:absolute;top:16px;left:16px;
+      padding:8px 14px;border-radius:999px;
+      background:rgba(15,12,9,.80);
+      border:1px solid rgba(201,169,97,.28);
+      color:var(--gold2);
+      font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase
+    }
+
+    .card-body{padding:20px}
+    .card-title{font-size:1.22rem;font-weight:700;margin-bottom:8px}
+    .card-desc{color:var(--muted);font-size:.94rem;margin-bottom:14px;min-height:68px}
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+    .chip{
+      padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.04);
+      border:1px solid rgba(201,169,97,.14);color:var(--gold2);font-size:.8rem;font-weight:600
+    }
+
+    .price-preview{
+      display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px
+    }
+    .price-box{
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(201,169,97,.14);
+      border-radius:16px;
+      padding:14px;
+    }
+    .price-box span{display:block;color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px}
+    .price-box strong{font-size:1.1rem}
+    .price-box.our strong{color:var(--gold2)}
+
+    .card-actions{display:flex;gap:10px;flex-wrap:wrap}
+    .card-actions .btn-primary,.card-actions .btn-secondary{flex:1 1 150px}
+
+    .note-banner{
+      margin-top:26px;padding:22px;border-radius:22px;
+      border:1px solid var(--line);
+      background:linear-gradient(135deg,rgba(201,169,97,.09),rgba(255,255,255,.03));
+      color:rgba(255,255,255,.92)
+    }
+
+    .drawer{
+      position:fixed;top:0;right:-100%;
+      width:min(520px,100%);
+      height:100vh;
+      background:linear-gradient(180deg,#15100c 0%,#0f0c09 100%);
+      border-left:1px solid var(--line);
+      box-shadow:-18px 0 40px rgba(0,0,0,.35);
+      z-index:2200;
+      transition:right .35s ease;
+      overflow:auto;
+    }
+    .drawer.open{right:0}
+    .drawer-header{
+      padding:22px 22px 14px;
+      border-bottom:1px solid var(--line);
+      position:sticky;top:0;background:rgba(21,16,12,.95);backdrop-filter:blur(10px);z-index:5
+    }
+    .drawer-top{display:flex;justify-content:space-between;gap:12px;align-items:start}
+    .drawer-top h3{
+      font-family:"Cormorant Garamond", Georgia, serif;
+      font-size:2rem;line-height:1.05
+    }
+    .close-btn{
+      width:42px;height:42px;border-radius:50%;border:1px solid var(--line);
+      background:rgba(255,255,255,.04);color:var(--text);cursor:pointer;font-size:1rem
+    }
+    .drawer-sub{color:var(--muted);margin-top:8px}
+
+    .drawer-body{padding:22px;display:grid;gap:18px}
+    .booking-image{
+      height:230px;border-radius:22px;overflow:hidden;border:1px solid var(--line)
+    }
+    .booking-image img{width:100%;height:100%;object-fit:cover}
+
+    .booking-panel{
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:18px;
+    }
+    .booking-panel h4{font-size:1rem;color:var(--gold2);margin-bottom:12px}
+
+    .pricing-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:12px
+    }
+    .price-detail{
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(201,169,97,.14);
+      border-radius:16px;
+      padding:14px;
+    }
+    .price-detail .lbl{
+      display:block;color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px
+    }
+    .price-detail .val{font-size:1.12rem;font-weight:800}
+    .price-detail.our .val{color:var(--gold2)}
+
+    .qty-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:14px
+    }
+    .qty-box label{
+      display:block;color:var(--muted);font-size:.84rem;margin-bottom:8px
+    }
+    .qty-box input{
+      width:100%;min-height:48px;padding:0 12px;border-radius:14px;
+      border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text)
+    }
+
+    .summary-row{
+      display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)
+    }
+    .summary-row:last-child{border-bottom:none}
+    .summary-row span{color:var(--muted)}
+    .summary-row strong{color:var(--text)}
+    .summary-row.total strong{color:var(--gold2);font-size:1.18rem}
+
+    .drawer-actions{
+      display:grid;grid-template-columns:1fr 1fr;gap:12px
+    }
+
+    .overlay{
+      position:fixed;inset:0;background:rgba(0,0,0,.46);opacity:0;visibility:hidden;transition:.25s ease;z-index:2100
+    }
+    .overlay.show{opacity:1;visibility:visible}
+
+    .floating-actions{
+      position:fixed;right:16px;bottom:16px;display:flex;flex-direction:column;gap:10px;z-index:2000
+    }
+    .floating-actions a{
+      width:50px;height:50px;border-radius:50%;display:grid;place-items:center;
+      background:linear-gradient(135deg,#f0d79e,#c9a961);color:#120e09;font-size:.82rem;font-weight:800;
+      box-shadow:var(--shadow);border:1px solid rgba(201,169,97,.38)
+    }
+
+    footer{
+      border-top:1px solid var(--line);
+      padding:26px 0 40px;color:var(--muted);font-size:.92rem
+    }
+
+    @media (max-width:1100px){
+      .hero-wrap,.cards{grid-template-columns:1fr}
+      .toolbar{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:720px){
+      .nav{padding:14px 0;align-items:flex-start;flex-direction:column}
+      .hero-copy,.hero-side{padding:24px}
+      .toolbar,.price-preview,.pricing-grid,.qty-grid,.drawer-actions{grid-template-columns:1fr}
+      .floating-actions{right:10px;top:92px;bottom:auto}
+      .floating-actions a{width:42px;height:42px;font-size:.72rem}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <div>
+        <div class="brand-title">Glance Limousine</div>
+        <div class="brand-sub">Luxury Transfers, Tours & Attractions</div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="singapore-transfer.html">Singapore Transfer</a>
+        <a href="malaysia-transfer.html">Malaysia Transfer</a>
+        <a href="singapore-tours.html">Singapore Tours</a>
+        <a href="malaysia-tours.html">Malaysia Tours</a>
+        <a href="singapore-attractions.html" class="active">Singapore Attractions</a>
+        <a href="wedding-chauffeur.html">Wedding Chauffeur</a>
+        <a href="corporate-events.html">Corporate Events</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <a class="nav-cta" href="#attractions">Book Tickets</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-wrap">
+      <div class="hero-copy">
+        <div class="eyebrow">Singapore Attractions</div>
+        <h1>Book attraction tickets with adult and child pricing in one premium flow.</h1>
+        <p>
+          This page is designed for direct online sales. Each attraction opens into a booking view where your guest can see
+          publish price, your selling price, select adult and child quantities, then either pay straight or add to cart.
+        </p>
+        <div class="hero-actions">
+          <a href="#attractions" class="btn-primary">View Attractions</a>
+          <a href="https://wa.me/6584444744" target="_blank" class="btn-secondary">WhatsApp Us</a>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <div class="mini">
+          <h3>Publish Price</h3>
+          <p>Use the official public ticket price.</p>
+        </div>
+        <div class="mini">
+          <h3>Our Price</h3>
+          <p>Use your online selling price. Replace placeholders later with live prices.</p>
+        </div>
+        <div class="mini">
+          <h3>Checkout Logic</h3>
+          <p>Guest can either pay immediately or add the selected tickets into the main cart flow.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section" id="attractions">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Singapore attraction tickets</h2>
+            <p>
+              A structured attractions catalogue using major ticketed Singapore attractions so you can plug in live prices,
+              Stripe checkout, or your site cart logic.
+            </p>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <input id="searchInput" type="text" placeholder="Search attractions..." />
+          <select id="categoryFilter">
+            <option value="all">All Categories</option>
+            <option value="Sentosa">Sentosa</option>
+            <option value="Wildlife">Wildlife</option>
+            <option value="Marina Bay">Marina Bay</option>
+            <option value="Nature">Nature</option>
+            <option value="Museum">Museum</option>
+          </select>
+          <select id="audienceFilter">
+            <option value="all">All Audience</option>
+            <option value="Family">Family</option>
+            <option value="Couples">Couples</option>
+            <option value="Tourists">Tourists</option>
+          </select>
+          <select id="sortFilter">
+            <option value="default">Sort: Default</option>
+            <option value="name">Sort: Name</option>
+          </select>
+        </div>
+
+        <div class="cards" id="cardsContainer"></div>
+
+        <div class="note-banner">
+          <strong>How this works:</strong> each attraction card opens a booking view. That second view shows
+          <strong>Adult Publish Price</strong>, <strong>Child Publish Price</strong>,
+          <strong>Our Adult Price</strong>, <strong>Our Child Price</strong>, quantity selectors, and two actions:
+          <strong>Pay Straight</strong> or <strong>Add to Cart</strong>.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 Glance Limousine. Premium Singapore transfers, tours and attraction booking experiences.
+    </div>
+  </footer>
+
+  <div class="floating-actions">
+    <a href="https://wa.me/6584444744" target="_blank" title="WhatsApp">WA</a>
+    <a href="tel:+6584444744" title="Call">Call</a>
+    <a href="mailto:admin@glancelimousine.com.sg" title="Mail">Mail</a>
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+
+  <aside class="drawer" id="bookingDrawer" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-top">
+        <div>
+          <h3 id="drawerTitle">Attraction Booking</h3>
+          <div class="drawerSub" id="drawerSub">Select ticket quantities and proceed.</div>
+        </div>
+        <button class="close-btn" id="closeDrawer">✕</button>
+      </div>
+    </div>
+
+    <div class="drawer-body">
+      <div class="booking-image">
+        <img id="drawerImage" src="" alt="">
+      </div>
+
+      <div class="booking-panel">
+        <h4>Ticket Pricing</h4>
+        <div class="pricing-grid">
+          <div class="price-detail">
+            <span class="lbl">Adult Publish Price</span>
+            <div class="val" id="adultPublishPrice">S$ 0</div>
+          </div>
+          <div class="price-detail">
+            <span class="lbl">Child Publish Price</span>
+            <div class="val" id="childPublishPrice">S$ 0</div>
+          </div>
+          <div class="price-detail our">
+            <span class="lbl">Our Adult Price</span>
+            <div class="val" id="adultOurPrice">S$ 0</div>
+          </div>
+          <div class="price-detail our">
+            <span class="lbl">Our Child Price</span>
+            <div class="val" id="childOurPrice">S$ 0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="booking-panel">
+        <h4>Select Quantity</h4>
+        <div class="qty-grid">
+          <div class="qty-box">
+            <label for="adultQty">Adult Quantity</label>
+            <input type="number" id="adultQty" min="0" value="1" />
+          </div>
+          <div class="qty-box">
+            <label for="childQty">Child Quantity</label>
+            <input type="number" id="childQty" min="0" value="0" />
+          </div>
+        </div>
+      </div>
+
+      <div class="booking-panel">
+        <h4>Booking Summary</h4>
+        <div class="summary-row">
+          <span>Adult Subtotal</span>
+          <strong id="adultSubtotal">S$ 0</strong>
+        </div>
+        <div class="summary-row">
+          <span>Child Subtotal</span>
+          <strong id="childSubtotal">S$ 0</strong>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <strong id="bookingTotal">S$ 0</strong>
+        </div>
+      </div>
+
+      <div class="drawer-actions">
+        <button class="btn-secondary" id="addToCartBtn">Add to Cart</button>
+        <button class="btn-primary" id="payStraightBtn">Pay Straight</button>
+      </div>
+
+      <div class="booking-panel">
+        <h4>Integration Notes</h4>
+        <p style="color: var(--muted); font-size: .92rem;">
+          Replace the current button actions with your real cart logic and Stripe checkout session.
+          You can also pass attraction name, adult qty, child qty, and totals into your main booking system.
+        </p>
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    const attractions = [
+      {
+        name: "Universal Studios Singapore",
+        category: "Sentosa",
+        audience: "Family",
+        desc: "Theme park experience with rides, shows, and family attractions on Sentosa.",
+        image: "https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=1200&q=80",
+        badge: "Popular Choice",
+        chips: ["Sentosa", "Theme Park", "Family"],
+        adultPublish: 88,
+        childPublish: 66,
+        adultOur: 82,
+        childOur: 61
+      },
+      {
+        name: "Adventure Cove Waterpark",
+        category: "Sentosa",
+        audience: "Family",
+        desc: "Waterpark attraction with slides, wave pools, and family-friendly aquatic fun.",
+        image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+        badge: "Water Fun",
+        chips: ["Sentosa", "Waterpark", "Family"],
+        adultPublish: 45,
+        childPublish: 35,
+        adultOur: 41,
+        childOur: 31
+      },
+      {
+        name: "Wings of Time",
+        category: "Sentosa",
+        audience: "Tourists",
+        desc: "Outdoor night show experience combining water, light, and music at Sentosa.",
+        image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80",
+        badge: "Evening Show",
+        chips: ["Sentosa", "Night Show", "Family"],
+        adultPublish: 22,
+        childPublish: 18,
+        adultOur: 19,
+        childOur: 16
+      },
+      {
+        name: "SkyHelix Sentosa",
+        category: "Sentosa",
+        audience: "Couples",
+        desc: "Open-air panoramic ride offering elevated views over Sentosa and the southern islands.",
+        image: "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80",
+        badge: "Scenic Ride",
+        chips: ["Sentosa", "Views", "Couples"],
+        adultPublish: 20,
+        childPublish: 17,
+        adultOur: 18,
+        childOur: 15
+      },
+      {
+        name: "Gardens by the Bay",
+        category: "Nature",
+        audience: "Tourists",
+        desc: "Iconic garden attraction with cooled conservatories and scenic horticultural experiences.",
+        image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=80",
+        badge: "Best Seller",
+        chips: ["Nature", "Scenic", "Tourists"],
+        adultPublish: 32,
+        childPublish: 18,
+        adultOur: 28,
+        childOur: 16
+      },
+      {
+        name: "Singapore Flyer",
+        category: "Marina Bay",
+        audience: "Couples",
+        desc: "Observation wheel experience with panoramic views across Marina Bay and the city skyline.",
+        image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80",
+        badge: "City Views",
+        chips: ["Marina Bay", "Views", "Couples"],
+        adultPublish: 40,
+        childPublish: 25,
+        adultOur: 36,
+        childOur: 23
+      },
+      {
+        name: "Marina Bay Sands SkyPark",
+        category: "Marina Bay",
+        audience: "Tourists",
+        desc: "Observation deck experience from one of Singapore’s most recognizable landmarks.",
+        image: "https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1200&q=80",
+        badge: "Premium View",
+        chips: ["Marina Bay", "Observation Deck", "Tourists"],
+        adultPublish: 35,
+        childPublish: 29,
+        adultOur: 32,
+        childOur: 26
+      },
+      {
+        name: "ArtScience Museum",
+        category: "Museum",
+        audience: "Tourists",
+        desc: "Immersive digital and art-led exhibitions in a landmark Marina Bay museum space.",
+        image: "https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=1200&q=80",
+        badge: "Museum",
+        chips: ["Museum", "Art", "Family"],
+        adultPublish: 27,
+        childPublish: 22,
+        adultOur: 24,
+        childOur: 19
+      },
+      {
+        name: "Singapore Zoo",
+        category: "Wildlife",
+        audience: "Family",
+        desc: "World-famous wildlife park known for immersive habitats and family-friendly experiences.",
+        image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=1200&q=80",
+        badge: "Wildlife",
+        chips: ["Mandai", "Family", "Wildlife"],
+        adultPublish: 49,
+        childPublish: 34,
+        adultOur: 45,
+        childOur: 31
+      },
+      {
+        name: "Night Safari",
+        category: "Wildlife",
+        audience: "Tourists",
+        desc: "Evening wildlife attraction with nocturnal animal experiences and night-time ambience.",
+        image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
+        badge: "Night Experience",
+        chips: ["Mandai", "Night", "Wildlife"],
+        adultPublish: 58,
+        childPublish: 40,
+        adultOur: 52,
+        childOur: 36
+      },
+      {
+        name: "Bird Paradise",
+        category: "Wildlife",
+        audience: "Family",
+        desc: "Modern bird park attraction with aviaries, walk-through habitats, and family exploration.",
+        image: "https://images.unsplash.com/photo-1444464666168-49d633b86797?auto=format&fit=crop&w=1200&q=80",
+        badge: "Bird Park",
+        chips: ["Mandai", "Family", "Birds"],
+        adultPublish: 49,
+        childPublish: 34,
+        adultOur: 45,
+        childOur: 31
+      },
+      {
+        name: "River Wonders",
+        category: "Wildlife",
+        audience: "Family",
+        desc: "River-themed wildlife park with freshwater species exhibits and family-friendly trails.",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+        badge: "River Experience",
+        chips: ["Mandai", "River", "Family"],
+        adultPublish: 43,
+        childPublish: 31,
+        adultOur: 39,
+        childOur: 28
+      },
+      {
+        name: "Exploria",
+        category: "Wildlife",
+        audience: "Tourists",
+        desc: "Indoor multimedia attraction at Mandai with immersive nature-themed environments.",
+        image: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=80",
+        badge: "New Attraction",
+        chips: ["Mandai", "Indoor", "Immersive"],
+        adultPublish: 38,
+        childPublish: 28,
+        adultOur: 34,
+        childOur: 25
+      }
+    ];
+
+    const cardsContainer = document.getElementById('cardsContainer');
+    const bookingDrawer = document.getElementById('bookingDrawer');
+    const overlay = document.getElementById('overlay');
+    const closeDrawer = document.getElementById('closeDrawer');
+    const searchInput = document.getElementById('searchInput');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const audienceFilter = document.getElementById('audienceFilter');
+    const sortFilter = document.getElementById('sortFilter');
+
+    let currentAttraction = null;
+
+    function formatMoney(value) {
+      return `S$ ${Number(value).toFixed(2)}`;
+    }
+
+    function renderCards() {
+      let filtered = [...attractions];
+
+      const search = searchInput.value.trim().toLowerCase();
+      const category = categoryFilter.value;
+      const audience = audienceFilter.value;
+      const sort = sortFilter.value;
+
+      if (search) {
+        filtered = filtered.filter(item =>
+          item.name.toLowerCase().includes(search) ||
+          item.desc.toLowerCase().includes(search) ||
+          item.category.toLowerCase().includes(search)
+        );
+      }
+
+      if (category !== 'all') {
+        filtered = filtered.filter(item => item.category === category);
+      }
+
+      if (audience !== 'all') {
+        filtered = filtered.filter(item => item.audience === audience);
+      }
+
+      if (sort === 'name') {
+        filtered.sort((a,b) => a.name.localeCompare(b.name));
+      }
+
+      cardsContainer.innerHTML = filtered.map((item, index) => `
+        <article class="card">
+          <div class="card-image">
+            <img src="${item.image}" alt="${item.name}">
+            <span class="badge">${item.badge}</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">${item.name}</h3>
+            <p class="card-desc">${item.desc}</p>
+
+            <div class="chips">
+              ${item.chips.map(chip => `<span class="chip">${chip}</span>`).join('')}
+            </div>
+
+            <div class="price-preview">
+              <div class="price-box">
+                <span>Our Adult Price</span>
+                <strong>${formatMoney(item.adultOur)}</strong>
+              </div>
+              <div class="price-box our">
+                <span>Our Child Price</span>
+                <strong>${formatMoney(item.childOur)}</strong>
+              </div>
+            </div>
+
+            <div class="card-actions">
+              <button class="btn-primary" onclick="window.openBooking(${index})">View Booking</button>
+              <a class="btn-secondary" href="https://wa.me/6584444744" target="_blank">Ask on WhatsApp</a>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function openBooking(index) {
+      currentAttraction = attractions[index];
+
+      document.getElementById('drawerTitle').textContent = currentAttraction.name;
+      document.getElementById('drawerSub').textContent = `${currentAttraction.category} • ${currentAttraction.audience}`;
+      document.getElementById('drawerImage').src = currentAttraction.image;
+      document.getElementById('drawerImage').alt = currentAttraction.name;
+
+      document.getElementById('adultPublishPrice').textContent = formatMoney(currentAttraction.adultPublish);
+      document.getElementById('childPublishPrice').textContent = formatMoney(currentAttraction.childPublish);
+      document.getElementById('adultOurPrice').textContent = formatMoney(currentAttraction.adultOur);
+      document.getElementById('childOurPrice').textContent = formatMoney(currentAttraction.childOur);
+
+      document.getElementById('adultQty').value = 1;
+      document.getElementById('childQty').value = 0;
+
+      updateSummary();
+
+      bookingDrawer.classList.add('open');
+      overlay.classList.add('show');
+      bookingDrawer.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeBooking() {
+      bookingDrawer.classList.remove('open');
+      overlay.classList.remove('show');
+      bookingDrawer.setAttribute('aria-hidden', 'true');
+    }
+
+    function updateSummary() {
+      if (!currentAttraction) return;
+
+      const adultQty = Math.max(0, parseInt(document.getElementById('adultQty').value || 0, 10));
+      const childQty = Math.max(0, parseInt(document.getElementById('childQty').value || 0, 10));
+
+      const adultSubtotal = adultQty * currentAttraction.adultOur;
+      const childSubtotal = childQty * currentAttraction.childOur;
+      const total = adultSubtotal + childSubtotal;
+
+      document.getElementById('adultSubtotal').textContent = formatMoney(adultSubtotal);
+      document.getElementById('childSubtotal').textContent = formatMoney(childSubtotal);
+      document.getElementById('bookingTotal').textContent = formatMoney(total);
+    }
+
+    document.getElementById('adultQty').addEventListener('input', updateSummary);
+    document.getElementById('childQty').addEventListener('input', updateSummary);
+    closeDrawer.addEventListener('click', closeBooking);
+    overlay.addEventListener('click', closeBooking);
+
+    searchInput.addEventListener('input', renderCards);
+    categoryFilter.addEventListener('change', renderCards);
+    audienceFilter.addEventListener('change', renderCards);
+    sortFilter.addEventListener('change', renderCards);
+
+    document.getElementById('addToCartBtn').addEventListener('click', () => {
+      if (!currentAttraction) return;
+      const adultQty = parseInt(document.getElementById('adultQty').value || 0, 10);
+      const childQty = parseInt(document.getElementById('childQty').value || 0, 10);
+      alert(
+        `Add to Cart:\n` +
+        `${currentAttraction.name}\n` +
+        `Adult Qty: ${adultQty}\n` +
+        `Child Qty: ${childQty}\n\n` +
+        `Next step: connect this button to your site cart logic.`
+      );
+    });
+
+    document.getElementById('payStraightBtn').addEventListener('click', () => {
+      if (!currentAttraction) return;
+      const adultQty = parseInt(document.getElementById('adultQty').value || 0, 10);
+      const childQty = parseInt(document.getElementById('childQty').value || 0, 10);
+      alert(
+        `Pay Straight:\n` +
+        `${currentAttraction.name}\n` +
+        `Adult Qty: ${adultQty}\n` +
+        `Child Qty: ${childQty}\n\n` +
+        `Next step: connect this button directly to Stripe checkout.`
+      );
+    });
+
+    renderCards();
+    window.openBooking = openBooking;
+  </script>
+</body>
+</html>

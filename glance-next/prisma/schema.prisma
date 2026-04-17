@@ -1,0 +1,353 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum UserRole {
+  ADMIN
+  CLIENT
+  PARTNER
+}
+
+enum BookingStatus {
+  NEW
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  NO_SHOW
+}
+
+enum BookingType {
+  ONE_WAY
+  RETURN
+  HOURLY
+  TOUR
+  ATTRACTION
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum AttractionAudience {
+  FAMILY
+  COUPLES
+  TOURISTS
+}
+
+enum TourServiceMode {
+  FULL_DRIVER
+  TWO_WAY
+  SHARED
+}
+
+enum ServiceSectionKey {
+  SINGAPORE_TRANSFER
+  CROSS_BORDER_TRANSFER
+  SINGAPORE_TOURS
+  MALAYSIA_TOURS
+  SINGAPORE_ATTRACTIONS
+}
+
+enum VehicleCategory {
+  LUXURY
+  BUSINESS
+  PREMIUM_ECONOMY
+  ECONOMY
+  VAN
+  BUS
+}
+
+model Tenant {
+  id              String           @id @default(cuid())
+  name            String           @unique
+  createdAt       DateTime         @default(now())
+  bookings        Booking[]
+  singaporeTransfers   SingaporeTransfer[]
+  crossBorderTransfers CrossBorderTransfer[]
+  singaporeTours       SingaporeTour[]
+  malaysiaTours        MalaysiaTour[]
+  singaporeAttractions SingaporeAttraction[]
+  leads                Lead[]
+  serviceCards         ServiceCard[]
+  serviceSections      ServiceSection[]
+  users                User[]
+}
+
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  password  String
+  role      UserRole  @default(CLIENT)
+  tenantId  String
+  createdAt DateTime  @default(now())
+  bookings  Booking[]
+  tenant    Tenant    @relation(fields: [tenantId], references: [id])
+}
+
+model Lead {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  message   String?
+  status    String   @default("new")
+  tenantId  String
+  createdAt DateTime @default(now())
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+}
+
+model SingaporeTransfer {
+  id              String          @id @default(cuid())
+  name            String
+  description     String?
+  category        VehicleCategory
+  imageUrl        String?
+  personCapacity  Int
+  smallLuggage    Int             @default(0)
+  bigLuggage      Int             @default(0)
+  hasChildSeat    Boolean         @default(false)
+  pricePerHour    Float
+  ratePerTransfer Float
+  isActive        Boolean         @default(true)
+  displayOrder    Int             @default(0)
+  tenantId        String
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  bookings        Booking[]
+  tenant          Tenant          @relation(fields: [tenantId], references: [id])
+}
+
+model CrossBorderTransfer {
+  id            String    @id @default(cuid())
+  destination   String
+  description   String?
+  imageUrl      String?
+  distanceKm    Int
+  priceEconomy  Float
+  pricePremium  Float
+  priceBusiness Float
+  priceLuxury   Float
+  isActive      Boolean   @default(true)
+  displayOrder  Int       @default(0)
+  tenantId      String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  bookings      Booking[]
+  tenant        Tenant    @relation(fields: [tenantId], references: [id])
+
+  @@index([tenantId, isActive, displayOrder])
+}
+
+model SingaporeTour {
+  id            String    @id @default(cuid())
+  title         String
+  description   String?
+  category      String
+  duration      String
+  serviceMode   String
+  adultPrice    Float
+  childPrice    Float
+  minAdults     Int       @default(2)
+  image         String?
+  isActive      Boolean   @default(true)
+  displayOrder  Int       @default(0)
+  tenantId      String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  images        TourImage[]
+  bookings      Booking[]
+  tenant        Tenant    @relation(fields: [tenantId], references: [id])
+}
+
+model MalaysiaTour {
+  id            String    @id @default(cuid())
+  title         String
+  description   String?
+  category      String
+  duration      String
+  serviceMode   String
+  adultPrice    Float
+  childPrice    Float
+  minAdults     Int       @default(2)
+  image         String?
+  isActive      Boolean   @default(true)
+  displayOrder  Int       @default(0)
+  tenantId      String
+  createdAt     DateTime  @default(now()) 
+  updatedAt     DateTime  @updatedAt
+  images        TourImage[]
+  bookings      Booking[]
+  tenant        Tenant    @relation(fields: [tenantId], references: [id])
+}
+
+model TourImage {
+  id              String         @id @default(cuid())
+  imageUrl        String
+  displayOrder    Int            @default(0)
+  createdAt       DateTime       @default(now())
+  
+  singaporeTourId String?
+  singaporeTour   SingaporeTour? @relation(fields: [singaporeTourId], references: [id], onDelete: Cascade)
+  
+  malaysiaTourId  String?
+  malaysiaTour    MalaysiaTour?  @relation(fields: [malaysiaTourId], references: [id], onDelete: Cascade)
+
+  @@index([singaporeTourId, displayOrder])
+  @@index([malaysiaTourId, displayOrder])
+}
+
+model SingaporeAttraction {
+  id                String    @id @default(cuid())
+  name              String
+  description       String?
+  imageUrl          String?
+  category          String
+  audience          String
+  badge             String?
+  adultPublishPrice Float
+  childPublishPrice Float
+  adultOurPrice     Float
+  childOurPrice     Float
+  isActive          Boolean   @default(true)
+  displayOrder      Int       @default(0)
+  tenantId          String
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  bookings          Booking[]
+  tenant            Tenant    @relation(fields: [tenantId], references: [id])
+}
+
+model ServiceSection {
+  id          String            @id @default(cuid())
+  key         ServiceSectionKey @unique
+  name        String
+  slug        String            @unique
+  description String?
+  isActive    Boolean           @default(true)
+  tenantId    String?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  serviceCards ServiceCard[]
+  tenant      Tenant?           @relation(fields: [tenantId], references: [id])
+}
+
+model ServiceCard {
+  id           String             @id @default(cuid())
+  sectionId    String
+  title        String
+  subtitle     String?
+  description  String?
+  imageUrl     String?
+  badge        String?
+  ctaLabel     String?
+  ctaHref      String?
+  displayOrder Int                @default(0)
+  isActive     Boolean            @default(true)
+  tenantId       String?
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+  bookings       Booking[]
+  images       ServiceCardImage[]
+  section      ServiceSection     @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  tenant       Tenant?            @relation(fields: [tenantId], references: [id])
+}
+
+model ServiceCardImage {
+  id           String      @id @default(cuid())
+  cardId       String
+  imageUrl     String
+  altText      String?
+  displayOrder Int         @default(0)
+  createdAt    DateTime    @default(now())
+  card         ServiceCard @relation(fields: [cardId], references: [id], onDelete: Cascade)
+
+  @@index([cardId, displayOrder])
+}
+
+model Booking {
+  id                 String         @id @default(cuid())
+  firstName          String
+  lastName           String
+  email              String
+  phone              String?
+  salutation         String?
+  passengerFirstName String?
+  passengerLastName  String?
+  passengerEmail     String?
+  passengerPhone     String?
+  type               BookingType    @default(ONE_WAY)
+  status             BookingStatus  @default(NEW)
+  referenceCode      String?        @unique
+  amount             Float?
+  currency           String         @default("SGD")
+  paymentStatus      PaymentStatus  @default(PENDING)
+  stripeStatus       String?
+  paymentIntentId    String?
+  paymentSession     String?
+  paidAt             DateTime?
+  failureReason      String?
+  pickup             String?
+  dropoff            String?
+  locationType       String[]
+  pickupDate         DateTime?
+  pickupTime         String?
+  flightNumber       String?
+  pickupSign         String?
+  notes              String?
+  specialRequest     String?
+  passengerCount     Int?
+  smallLuggage       Int?
+  bigLuggage         Int?
+  adultQty           Int?
+  childQty           Int?
+  vehicleUpgradeRate Float?
+  guideRate          Float?
+  guideLabel         String?
+  babySeatQty        Int?
+  photographerRate   Float?
+  tourHours          Float?
+  tenantId           String?
+  userId             String?
+  singaporeTransferId   String?
+  crossBorderTransferId String?
+  singaporeTourId       String?
+  malaysiaTourId        String?
+  singaporeAttractionId String?
+  serviceCardId         String?
+  createdAt             DateTime           @default(now())
+  updatedAt             DateTime           @updatedAt
+  
+  singaporeTransfer     SingaporeTransfer?   @relation(fields: [singaporeTransferId], references: [id])
+  crossBorderTransfer   CrossBorderTransfer? @relation(fields: [crossBorderTransferId], references: [id])
+  singaporeTour         SingaporeTour?       @relation(fields: [singaporeTourId], references: [id])
+  malaysiaTour          MalaysiaTour?        @relation(fields: [malaysiaTourId], references: [id])
+  singaporeAttraction   SingaporeAttraction? @relation(fields: [singaporeAttractionId], references: [id])
+  serviceCard           ServiceCard?         @relation(fields: [serviceCardId], references: [id])
+  tenant                Tenant?              @relation(fields: [tenantId], references: [id])
+  user                  User?                @relation(fields: [userId], references: [id])
+
+  @@index([referenceCode])
+  @@index([tenantId, status, createdAt])
+}
+
+model Blog {
+  id          String    @id @default(cuid())
+  title       String
+  content     String
+  slug        String    @unique
+  imageUrl    String?
+  keywords    String[]
+  scheduledAt DateTime?
+  published   Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}

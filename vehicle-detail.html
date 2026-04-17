@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Vehicle Detail | Glance Limousine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
+    <link href="styles.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="topbar">Premium chauffeur service · airport transfers · private tours · cross-border Singapore–Malaysia
+    </div>
+    <header class="navbar">
+        <div class="container nav-inner">
+            <div class="brand">
+                <img alt="Glance Limousine logo" class="brand-logo"
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAYAAADL1t+KAAEAAElEQVR4XuydBYAsxbX+p7tnZuU67lwkCSQQJEoUEognQIgbRF5eXlz+cSH24q4v9qIvLoSQkBA0aEhwh8sV4Lqtjbb9f19v99A7O7o7u3f3UgV1e7a79Cs5VafOOZXJGGcQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQMAgYBAwCBgGDgEHAIGAQ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" />
+                <div class="brand-copy">
+                    <div class="brand-title">Glance Limousine</div>
+                    <div class="brand-sub">Luxury In Motion · Singapore</div>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html#home">Home</a><a href="index.html#sg-transfer">Singapore Transfer</a><a href="index.html#my-transfer">Cross Border
+                    Transfer</a><a href="index.html#sg-tours">Singapore Tours</a><a href="index.html#my-tours">Malaysia Tours</a><a
+                    href="singapore-attractions.html">Singapore Attractions</a><a
+                    href="wedding-chauffeur.html">Wedding Chauffeur</a><a
+                    href="corporate-events.html">Corporate Events</a><a
+                    href="index.html#shared">Seat In Coach</a><a href="index.html#fleet">Our Fleet</a><a href="index.html#faq">FAQ</a><a
+                    href="index.html#contact">Contact</a><a href="index.html#terms">Terms</a>
+            </nav>
+        </div>
+    </header>
+    
+    <style>
+        :root {
+            --bg: #181311;
+            --bg2: #241c18;
+            --panel: #2c221d;
+            --panel-soft: #332821;
+            --line: rgba(212, 177, 95, 0.18);
+            --gold: #d4b15f;
+            --gold-2: #f0d389;
+            --text: #f7f1e8;
+            --muted: #cbbda9;
+            --muted-2: #a69179;
+        }
+
+        .vehicle-booking-detail {
+            padding: 120px 0 80px;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .booking-shell {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .vehicle-preview-card {
+            background: var(--bg2);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 30px;
+            position: sticky;
+            top: 100px;
+        }
+
+        .vehicle-preview-image-wrap {
+            width: 100%;
+            height: 240px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 18px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .vehicle-preview-image {
+            max-width: 90%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+
+        .vehicle-tier-badge {
+            display: inline-block;
+            background: rgba(212, 177, 95, 0.1);
+            color: var(--gold);
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 15px;
+            border: 1px solid var(--line);
+        }
+
+        .vehicle-preview-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: var(--gold-2);
+        }
+
+        .vehicle-meta-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .vehicle-meta-pill {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--line);
+            padding: 8px 14px;
+            border-radius: 12px;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .vehicle-price-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--line);
+        }
+
+        .vehicle-price-box {
+            text-align: center;
+        }
+
+        .vehicle-price-label {
+            display: block;
+            font-size: 12px;
+            color: var(--muted-2);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .vehicle-price-box strong {
+            font-size: 20px;
+            color: var(--gold);
+        }
+
+        .booking-form-container {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 32px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .booking-type-toggle {
+            display: flex;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 6px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+        }
+
+        .type-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: transparent;
+            color: var(--muted);
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .type-btn.active {
+            background: var(--gold);
+            color: #120f0d;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background: var(--panel-soft);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 14px;
+            color: var(--text);
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--gold);
+        }
+
+        .booking-summary-card {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            border-radius: 20px;
+            margin-top: 30px;
+            border: 1px solid var(--line);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--line);
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--gold-2);
+        }
+
+        .booking-actions {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-primary {
+            flex: 1;
+            background: var(--gold);
+            color: #120f0d;
+            border: none;
+            padding: 16px;
+            border-radius: 999px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-secondary {
+            flex: 1;
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 16px;
+            border-radius: 999px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        @media (max-width: 992px) {
+            .booking-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .vehicle-preview-card {
+                position: static;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: span 1;
+            }
+        }
+    </style>
+
+    <section class="vehicle-booking-detail">
+        <div class="booking-shell">
+            <div class="booking-left">
+                <div class="vehicle-preview-card">
+                    <div class="vehicle-preview-image-wrap">
+                        <img id="detailVehicleImage" src="images/fleet/w223.png" alt="Mercedes S Class W223" class="vehicle-preview-image" />
+                    </div>
+
+                    <span class="vehicle-tier-badge" id="detailVehicleTier">Luxury</span>
+                    <h1 class="vehicle-preview-title" id="detailVehicleTitle">Mercedes S Class (W223)</h1>
+
+                    <div class="vehicle-meta-row">
+                        <div class="vehicle-meta-pill" id="detailVehiclePax">👥 2 Pax</div>
+                        <div class="vehicle-meta-pill" id="detailVehicleLuggage">🧳 2S / 2B</div>
+                    </div>
+
+                    <div class="vehicle-price-grid">
+                        <div class="vehicle-price-box">
+                            <span class="vehicle-price-label">Hourly</span>
+                            <strong id="detailRateHourly">SGD 195</strong>
+                        </div>
+                        <div class="vehicle-price-box">
+                            <span class="vehicle-price-label">Transfer</span>
+                            <strong id="detailRateTransfer">SGD 200</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="booking-right">
+                <div class="booking-form-container">
+                    <div class="booking-type-toggle">
+                        <button class="type-btn active" onclick="switchBookingType('hourly')">Hourly Charter</button>
+                        <button class="type-btn" onclick="switchBookingType('transfer')">One-Way / Transfer</button>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Pick-up Date</label>
+                            <input type="date" id="bookDate" />
+                        </div>
+                        <div class="form-group">
+                            <label>Pick-up Time</label>
+                            <input type="time" id="bookTime" />
+                        </div>
+
+                        <div class="form-group full">
+                            <label>Pick-up Address</label>
+                            <input type="text" placeholder="Hotel, Airport, or Street address" id="bookPickup" />
+                        </div>
+
+                        <!-- Only for Hourly -->
+                        <div class="form-group" id="groupHours">
+                            <label>Duration (Hours)</label>
+                            <select id="bookHours" onchange="calculateTotal()">
+                                <option value="3">3 Hours (Min)</option>
+                                <option value="4">4 Hours</option>
+                                <option value="5">5 Hours</option>
+                                <option value="6">6 Hours</option>
+                                <option value="8">8 Hours</option>
+                                <option value="10">10 Hours</option>
+                                <option value="12">12 Hours</option>
+                            </select>
+                        </div>
+
+                        <!-- Only for Transfer -->
+                        <div class="form-group full" id="groupDropoff" style="display:none;">
+                            <label>Drop-off Address</label>
+                            <input type="text" placeholder="Destination address" id="bookDropoff" />
+                        </div>
+
+                        <div class="form-group full">
+                            <label>Special Requests</label>
+                            <textarea rows="3" placeholder="Flight number, child seats, etc." id="bookNotes"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="booking-summary-card">
+                        <div class="summary-row">
+                            <span>Base Rate</span>
+                            <span id="summaryBase">SGD 0</span>
+                        </div>
+                        <div class="summary-row" id="rowHours" style="display:none;">
+                            <span>Duration Multiplier</span>
+                            <span id="summaryMultiplier">x 3</span>
+                        </div>
+                        <div class="summary-total">
+                            <span>Estimated Total</span>
+                            <strong id="summaryTotal">SGD 0</strong>
+                        </div>
+                    </div>
+
+                    <div class="booking-actions">
+                        <button class="btn-primary" onclick="proceedToPayment()">Book Now</button>
+                        <button class="btn-secondary" onclick="addToCart()">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let currentType = 'hourly';
+        let baseHourly = 195;
+        let baseTransfer = 200;
+
+        function switchBookingType(type) {
+            currentType = type;
+            document.querySelectorAll('.type-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const groupHours = document.getElementById('groupHours');
+            const groupDropoff = document.getElementById('groupDropoff');
+            const rowHours = document.getElementById('rowHours');
+
+            if (type === 'hourly') {
+                groupHours.style.display = 'flex';
+                groupDropoff.style.display = 'none';
+                rowHours.style.display = 'flex';
+            } else {
+                groupHours.style.display = 'none';
+                groupDropoff.style.display = 'flex';
+                rowHours.style.display = 'none';
+            }
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            const hours = parseInt(document.getElementById('bookHours').value) || 3;
+            let total = 0;
+
+            if (currentType === 'hourly') {
+                total = baseHourly * hours;
+                document.getElementById('summaryBase').innerText = `SGD ${baseHourly} / hr`;
+                document.getElementById('summaryMultiplier').innerText = `x ${hours} hrs`;
+            } else {
+                total = baseTransfer;
+                document.getElementById('summaryBase').innerText = `SGD ${baseTransfer} (Flat)`;
+            }
+
+            document.getElementById('summaryTotal').innerText = `SGD ${total}`;
+        }
+
+        function proceedToPayment() {
+            alert('Redirecting to payment gateway...');
+        }
+
+        function addToCart() {
+            alert('Item added to cart!');
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            // In a real app, logic here would pull vehicle ID from URL
+            // For now we use the Mercedes S Class as default
+            calculateTotal();
+        });
+    </script>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <h4>Glance Limousine</h4>
+                <p>Timeless chauffeur excellence across Singapore and Malaysia.</p>
+            </div>
+            <div>
+                <h4>Main Pages</h4><a href="index.html#home">Home</a><a href="index.html#sg-transfer">Singapore Transfer</a><a
+                    href="index.html#faq">FAQ</a><a href="index.html#contact">Contact</a>
+            </div>
+            <div>
+                <h4>Booking Pages</h4><a href="index.html#sg-tours">Singapore Tours</a><a href="index.html#my-tours">Malaysia Tours</a><a
+                    href="index.html#my-transfer">Malaysia Transfer</a><a href="index.html#shared">Seat In Coach</a>
+            </div>
+            <div>
+                <h4>Support</h4><a href="index.html#fleet">Fleet</a><a href="index.html#terms">Terms &amp; Conditions</a><a
+                    href="index.html#faq">FAQ</a><a href="index.html#contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+    <div class="cart-drawer" id="cartDrawer">
+        <button class="cart-close" onclick="closeCart()">×</button>
+        <h4>Cart <span class="cart-count" id="cartCount">0</span></h4>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">No items yet.</div>
+        </div>
+        <div class="cart-total"><span>Total</span><strong id="cartTotal">SGD 0</strong></div>
+        <div class="action-row"><button class="btn" onclick="checkoutCart()">Pay Cart</button><button class="btn ghost"
+                onclick="clearCart()">Clear Cart</button></div>
+    </div>
+    <div class="floating-dock"><a class="dock-wa" href="https://wa.me/6584444744" target="_blank">WhatsApp</a><a
+            class="dock-mail" href="mailto:admin@glancelimousine.com.sg">Email</a><a class="dock-call"
+            href="tel:+6584444744">Call</a><a class="dock-link" href="index.html#shared">Seat In Coach</a><a class="dock-link"
+            href="index.html#sg-tours">Singapore Tours</a><a class="dock-link" href="index.html#my-tours">Malaysia Tours</a><a
+            class="dock-link" href="index.html#my-transfer">Cross Border</a><a class="dock-link" href="index.html#terms">Terms</a></div>
+
+    <button class="cart-toggle" id="cartToggle" onclick="toggleCart()">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cartBadge" class="cart-badge">0</span>
+    </button>
+
+    <script src="app.js"></script>
+</body>
+</html>

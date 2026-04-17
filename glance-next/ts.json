@@ -1,0 +1,1 @@
+["app/api/crm/cars/route.ts(82,29): error TS2552: Cannot find name 'VehicleCategoryStr'. Did you mean 'VehicleCategory'?\r","app/api/public/services/[service]/[cardId]/route.ts(16,28): error TS2339: Property 'templateName' does not exist on type 'ServiceSectionConfig'.\r",""]
